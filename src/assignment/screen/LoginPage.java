@@ -5,6 +5,11 @@
  */
 package assignment.screen;
 
+import assignment.main.Server;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author howard
@@ -128,9 +133,29 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String user = Username.getText();
+        char[] pass = Password.getPassword();
+        String verif = user+ new String(pass);
+        System.out.println(verif);
         
-        assignment.main.Main.main.setVisible(true);
-        this.dispose();
+        Server x = new Server();
+        try {
+            if(x.verification(verif)){
+                assignment.main.Main.main.setVisible(true);
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(this,
+                    "Wrong Username/Password",
+                    "Authentication Fail",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

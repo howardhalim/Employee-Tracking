@@ -5,7 +5,17 @@
  */
 package assignment.screen;
 
+import assignment.ds.MySignature;
+import assignment.main.Server;
 import java.awt.Color;
+import java.io.FileWriter;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -138,14 +148,44 @@ public class RegisterPage extends javax.swing.JFrame {
         String pass = new String(Password.getPassword());
         System.out.println(user + " " +pass);
         
-        if(user.equals("Howard")){
-            
-            this.Error.setForeground(Color.RED);
+        
+        Server x = new Server();
+        if(x.checkUsername(user)){
+            String sign = user+pass;
+            MySignature mysig = new MySignature();
+            try {
+                String signature = mysig.sign(sign);
+                System.out.println(signature);
+                
+                String projectPath = System.getProperty("user.dir");
+                FileWriter wr = new FileWriter(projectPath+"\\PublicKey.txt",true);
+                byte[] pubkey = mysig.getPublicKey().getEncoded();
+                String pubKey = Base64.getEncoder().encodeToString(pubkey);
+                System.out.println(pubKey);
+                wr.write(pubKey);
+                wr.write(System.getProperty( "line.separator" ));
+                wr.close();
+                x.registerAccount(signature, user);
+                
+                byte[] publicBytes = org.apache.commons.codec.binary.Base64.decodeBase64(pubKey);
+                X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
+                KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+                PublicKey pk = keyFactory.generatePublic(keySpec);
+                
+                System.out.println(mysig.verify(sign, signature, pk));
+                
+                this.dispose();
+                LoginPage login = new LoginPage();
+                login.setVisible(true);
+            } catch (Exception ex) {}
+        }
+        else{
+            Error.setForeground(Color.RED);
         }
         
-        this.dispose();
-        LoginPage login = new LoginPage();
-        login.setVisible(true);
+        
+        
+        
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed

@@ -5,8 +5,14 @@
  */
 package assignment.main;
 
+import assignment.ds.MySignature;
 import assignment.screen.MainPage;
 import assignment.screen.RegisterPage;
+import java.io.FileWriter;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -14,8 +20,22 @@ import assignment.screen.RegisterPage;
  */
 public class Main {
    public static MainPage main = new MainPage();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         assignment.screen.LoginPage res = new assignment.screen.LoginPage();
         res.setVisible(true);
+
+//        MySignature mysig = new MySignature();
+//        byte[] publicBytes = Base64.decodeBase64("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCR5hlWzDSvNzsW6xKl3trTbczPNekq2Bx4CeOSjxh++HqMPnd14bwBWWiIQ5VkURyn+x60BxGp6WpHjN/0aiPLqZV1OfB2GOrUUTbbtXe8av7mUOZjLj39kNw01kpB7tQSutuJKgOhfogCQt++75rFHTFEH4L1+cv8RcRpAFYmlwIDAQAB");
+//        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
+//        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+//        PublicKey pub = keyFactory.generatePublic(keySpec);
+//        System.out.println(mysig.verify("Howard12345", "fpl5ZzBBhvh3w9WPdWx2rh3CC5ijQma6XrVtYf4Q3nQRXsg7K76LjwiQb8hgYuTmv0eDB4C/VFpiEOEikOR2PDrix/Z4C8ndUYnbntui2insYnfE8YdIg+4bqy4ge1PBnzXAmssLJF3RitO2qCDClvAyHar43yrg8YintY999cc=", pub));
+//        
+//        String projectPath = System.getProperty("user.dir");
+//        FileWriter wr = new FileWriter(projectPath+"\\PublicKey.txt",true);
+//        wr.write(System.getProperty( "line.separator" ));
+//        wr.write("TEST");
+//        wr.close();
+    
     }
 }
