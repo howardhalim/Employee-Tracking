@@ -8,6 +8,7 @@ import java.awt.Color;
 import static java.lang.Integer.parseInt;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -245,15 +246,46 @@ public class Location extends javax.swing.JFrame {
     private void scanHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanHourActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_scanHourActionPerformed
-
+    
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
-        String employee = employeeId.getText();
-        String gateway = gatewayId.getText();
-        int detectedH = parseInt(detectedHour.getText());
-        int detectedM = parseInt(detectedMin.getText());
-        int scanH = parseInt(scanHour.getText());
-        int scanM = parseInt(scanMin.getText());
-//        System.out.println(employee + " " + gateway + " " + detectedH + ":" + detectedM + scanH + ":" + scanM);
+        try {
+            boolean passed = false;
+            // Get Form data
+            String employee = employeeId.getText();
+            String gateway = gatewayId.getText();
+            int detectedH = parseInt(detectedHour.getText());
+            int detectedM = parseInt(detectedMin.getText());
+            int scanH = parseInt(scanHour.getText());
+            int scanM = parseInt(scanMin.getText());
+            
+            // Validate time input (daily)
+            if (detectedH > 23 || detectedH < 0 || scanH > 23 || scanH < 0){
+                JOptionPane.showMessageDialog(this, "Invalid Hour!\nPlease input from 00 to 23");
+            } else if (detectedM > 59 || detectedM < 0 || scanM > 59 || scanM < 0){
+                JOptionPane.showMessageDialog(this, "Invalid Minute!\nPlease input from 00 to 59");
+            } else if (scanH < detectedH || (scanH == detectedH && scanM < detectedM)){
+                JOptionPane.showMessageDialog(this, "Employee detected time shouldn't exceed scan time!");
+            } else {
+                passed = true;
+            }
+            
+            if (passed){
+                String detectedTime = detectedH + ":" + detectedM;
+                String scanTime = scanH + ":" + scanM;
+                // Pass data to server
+                boolean success = assignment.main.Server.addEmployeeLocation(employee, gateway, detectedTime, scanTime);
+                if (success){
+                    JOptionPane.showMessageDialog(this, "Location Added!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to add location.\nPlease try again!");
+                }
+                // Restart page
+                this.dispose();
+                new Location().setVisible(true);
+            } 
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Please input correctly!");
+        }
     }//GEN-LAST:event_submitActionPerformed
 
     private void detectedMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detectedMinActionPerformed
@@ -290,15 +322,9 @@ public class Location extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Location.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } 
         //</editor-fold>
 
         /* Create and display the form */
