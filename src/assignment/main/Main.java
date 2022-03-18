@@ -5,6 +5,7 @@
  */
 package assignment.main;
 
+import assignment.screen.MainPage;
 import assignment.screen.RegisterPage;
 
 /**
@@ -12,9 +13,9 @@ import assignment.screen.RegisterPage;
  * @author howard
  */
 public class Main {
-   
+   public static MainPage main = new MainPage();
     public static void main(String[] args) {
-        RegisterPage res = new RegisterPage();
+        assignment.screen.LoginPage res = new assignment.screen.LoginPage();
         res.setVisible(true);
     }
 }
