@@ -17,7 +17,7 @@ public class AttendanceChoice extends javax.swing.JFrame {
     public AttendanceChoice() {
         initComponents();
     }
-
+    public static AttendanceView att;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,7 +92,7 @@ public class AttendanceChoice extends javax.swing.JFrame {
 
     private void ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewActionPerformed
         // TODO add your handling code here:
-        AttendanceView att = new AttendanceView();
+        att = new AttendanceView();
         att.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ViewActionPerformed

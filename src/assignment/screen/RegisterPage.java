@@ -142,6 +142,10 @@ public class RegisterPage extends javax.swing.JFrame {
             
             this.Error.setForeground(Color.RED);
         }
+        
+        this.dispose();
+        LoginPage login = new LoginPage();
+        login.setVisible(true);
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void UsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameActionPerformed

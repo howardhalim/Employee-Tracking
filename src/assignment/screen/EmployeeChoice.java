@@ -17,7 +17,7 @@ public class EmployeeChoice extends javax.swing.JFrame {
     public EmployeeChoice() {
         initComponents();
     }
-
+    public static EmployeeView emp;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,7 +92,7 @@ public class EmployeeChoice extends javax.swing.JFrame {
 
     private void ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewActionPerformed
         // TODO add your handling code here:
-        EmployeeView emp = new EmployeeView();
+        emp = new EmployeeView();
         emp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ViewActionPerformed
