@@ -1,3 +1,9 @@
 /build/
 *.db
 private.properties
+*.html
+commons-codec-1.15/apidocs/package-list
+*.js
+*.css
+*.jar
+*.txt
