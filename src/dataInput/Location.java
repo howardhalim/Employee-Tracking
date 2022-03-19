@@ -261,6 +261,7 @@ public class Location extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         try {
             boolean passed = false;
+            String status = "Online";
             // Get Form data
             int idx = EmployeeList.getSelectedIndex();
             int idx2 = GatewayList.getSelectedIndex();
@@ -277,8 +278,6 @@ public class Location extends javax.swing.JFrame {
                 GatewayClass GatewaySelected = assignment.main.Main.GatewayList.get(idx2);
                 String employee = String.valueOf(x.getEmployeeId(EmployeeSelected));
                 String gateway = String.valueOf(GatewaySelected.getGateway_id());
-//                String employee = employeeId.getText();
-//                String gateway = gatewayId.getText();
                 int detectedH = parseInt(detectedHour.getText());
                 int detectedM = parseInt(detectedMin.getText());
                 int scanH = parseInt(scanHour.getText());
@@ -301,6 +300,15 @@ public class Location extends javax.swing.JFrame {
                     loc.setGatewayId(gateway);
                     loc.setDetectedTime(String.format("%02d", detectedH) + ":" + String.format("%02d", detectedM));
                     loc.setScanTime(String.format("%02d", scanH) + ":" + String.format("%02d", scanM));
+                    // duration in minutes
+                    int duration = (scanH-detectedH)*60 + Math.abs(scanM-detectedM);
+                    System.out.println(duration);
+                    // 30 mins = away
+                    if (duration > 30){
+                        status = "Away";
+                    }
+                    loc.setDuration(duration);
+                    loc.setStatus(status);
                     locList.add(loc);
 
                     if (JOptionPane.showConfirmDialog(this, "Do you want to add more records?", "QUESTION",
@@ -322,10 +330,9 @@ public class Location extends javax.swing.JFrame {
                         this.dispose();
                         new Location().setVisible(true);
                     }
-                } 
-            }    
-        }
-        catch (Exception e){
+                }
+            } 
+        } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Please input correctly!");
         }
             
