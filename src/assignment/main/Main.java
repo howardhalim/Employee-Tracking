@@ -6,12 +6,14 @@
 package assignment.main;
 
 import assignment.ds.MySignature;
+import assignment.function.EmployeeClass;
 import assignment.screen.MainPage;
 import assignment.screen.RegisterPage;
 import java.io.FileWriter;
 import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 
 /**
@@ -20,7 +22,11 @@ import org.apache.commons.codec.binary.Base64;
  */
 public class Main {
    public static MainPage main = new MainPage();
+   public static List<EmployeeClass> EmployeeList;
     public static void main(String[] args) throws Exception {
+        Server x = new Server();
+        EmployeeList = x.getEmployee();
+        System.out.println(EmployeeList);
         assignment.screen.LoginPage res = new assignment.screen.LoginPage();
         res.setVisible(true);
 

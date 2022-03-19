@@ -5,6 +5,11 @@
  */
 package assignment.screen;
 
+import assignment.function.EmployeeClass;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author howard
@@ -43,6 +48,18 @@ public class EmployeeView extends javax.swing.JFrame {
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
+        List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+        String[] name = new String[emp.size()];
+        for(int i = 0;i<emp.size();i++){
+            name[i] = emp.get(i).getName();
+        }
+        jList1.setListData(name);
+
+        SearchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchFieldActionPerformed(evt);
+            }
+        });
 
         Search.setBackground(new java.awt.Color(173, 216, 230));
         Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment/dataset/search_1_3.png"))); // NOI18N
@@ -172,6 +189,10 @@ public class EmployeeView extends javax.swing.JFrame {
         this.dispose();
         assignment.main.Main.main.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
+
+    private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchFieldActionPerformed
 
     /**
      * @param args the command line arguments

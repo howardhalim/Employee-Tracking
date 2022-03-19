@@ -4,6 +4,11 @@
  */
 package dataInput;
 
+import assignment.main.Main;
+import assignment.main.Server;
+import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Steven-
@@ -30,13 +35,13 @@ public class Employee extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        employeeId = new javax.swing.JTextField();
+        EmployeeFirstName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        employeeId1 = new javax.swing.JTextField();
+        EmployeeLastName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        employeeId2 = new javax.swing.JTextField();
+        IC_Passport = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        employeeId3 = new javax.swing.JTextField();
+        rate = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,33 +64,33 @@ public class Employee extends javax.swing.JFrame {
 
         jLabel2.setText("Employee First Name");
 
-        employeeId.addActionListener(new java.awt.event.ActionListener() {
+        EmployeeFirstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeIdActionPerformed(evt);
+                EmployeeFirstNameActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Employee Last Name");
 
-        employeeId1.addActionListener(new java.awt.event.ActionListener() {
+        EmployeeLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeId1ActionPerformed(evt);
+                EmployeeLastNameActionPerformed(evt);
             }
         });
 
         jLabel4.setText("IC/Passport");
 
-        employeeId2.addActionListener(new java.awt.event.ActionListener() {
+        IC_Passport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeId2ActionPerformed(evt);
+                IC_PassportActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Hourly Rate");
 
-        employeeId3.addActionListener(new java.awt.event.ActionListener() {
+        rate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeId3ActionPerformed(evt);
+                rateActionPerformed(evt);
             }
         });
 
@@ -117,10 +122,10 @@ public class Employee extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(55, 55, 55)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(employeeId1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(employeeId, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(employeeId2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(employeeId3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(EmployeeLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EmployeeFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(IC_Passport, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -136,19 +141,19 @@ public class Employee extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(employeeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmployeeFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(employeeId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(EmployeeLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(employeeId2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(IC_Passport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(employeeId3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
@@ -182,24 +187,66 @@ public class Employee extends javax.swing.JFrame {
         assignment.main.Main.main.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
-    private void employeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeIdActionPerformed
+    private void EmployeeFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeFirstNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_employeeIdActionPerformed
+    }//GEN-LAST:event_EmployeeFirstNameActionPerformed
 
-    private void employeeId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeId1ActionPerformed
+    private void EmployeeLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeeLastNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_employeeId1ActionPerformed
+    }//GEN-LAST:event_EmployeeLastNameActionPerformed
 
-    private void employeeId2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeId2ActionPerformed
+    private void IC_PassportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IC_PassportActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_employeeId2ActionPerformed
+    }//GEN-LAST:event_IC_PassportActionPerformed
 
-    private void employeeId3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeId3ActionPerformed
+    private void rateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_employeeId3ActionPerformed
+    }//GEN-LAST:event_rateActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String first_name = EmployeeFirstName.getText();
+        String last_name = EmployeeLastName.getText();
+        String ic_passport = IC_Passport.getText();
+        String rates = rate.getText();
+        
+        if(first_name.equals("") || last_name.equals("") || ic_passport.equals("") || rates.equals("")){
+            JOptionPane.showMessageDialog(this,
+                    "Fill in All Details!",
+                    "Submit Fail",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            this.dispose();
+            new Employee().setVisible(true);
+        }
+        else{
+            try{
+                Float.parseFloat(rates);
+                double hourly_rate = Float.parseFloat(rates);
+                double rate = Math.round(hourly_rate * 100.0) / 100.0;
+                
+                Server x = new Server();
+                String name = first_name + " " + last_name;
+                x.addEmployee(name,ic_passport,rate);
+                JOptionPane.showMessageDialog(this,
+                    "Data Inputted Successfully!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                assignment.main.Main.EmployeeList = x.getEmployee();
+                this.dispose();
+                assignment.main.Main.main.setVisible(true);
+                
+            }catch(NumberFormatException e){
+                //not float
+                JOptionPane.showMessageDialog(this,
+                    "Hourly_Rate Must Be in a Real Number!",
+                    "Submit Fail",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                rate.setText("");
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -239,11 +286,10 @@ public class Employee extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField EmployeeFirstName;
+    private javax.swing.JTextField EmployeeLastName;
+    private javax.swing.JTextField IC_Passport;
     private javax.swing.JButton back;
-    private javax.swing.JTextField employeeId;
-    private javax.swing.JTextField employeeId1;
-    private javax.swing.JTextField employeeId2;
-    private javax.swing.JTextField employeeId3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -251,5 +297,6 @@ public class Employee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField rate;
     // End of variables declaration//GEN-END:variables
 }

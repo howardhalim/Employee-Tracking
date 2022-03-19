@@ -71,10 +71,10 @@
                           </Group>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="employeeId1" min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="employeeId" min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="employeeId2" min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="employeeId3" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="EmployeeLastName" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="EmployeeFirstName" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="IC_Passport" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="rate" min="-2" pref="113" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       </Group>
@@ -96,22 +96,22 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="employeeId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="EmployeeFirstName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="employeeId1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="EmployeeLastName" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="employeeId2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="IC_Passport" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="employeeId3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
@@ -151,9 +151,9 @@
             <Property name="text" type="java.lang.String" value="Employee First Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="employeeId">
+        <Component class="javax.swing.JTextField" name="EmployeeFirstName">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeeIdActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EmployeeFirstNameActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -161,9 +161,9 @@
             <Property name="text" type="java.lang.String" value="Employee Last Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="employeeId1">
+        <Component class="javax.swing.JTextField" name="EmployeeLastName">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeeId1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EmployeeLastNameActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -171,9 +171,9 @@
             <Property name="text" type="java.lang.String" value="IC/Passport"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="employeeId2">
+        <Component class="javax.swing.JTextField" name="IC_Passport">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeeId2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IC_PassportActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -181,9 +181,9 @@
             <Property name="text" type="java.lang.String" value="Hourly Rate"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="employeeId3">
+        <Component class="javax.swing.JTextField" name="rate">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="employeeId3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rateActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">

@@ -6,6 +6,7 @@ package assignment.main;
 
 import assignment.crypto.Blockchain;
 import assignment.ds.MySignature;
+import assignment.function.EmployeeClass;
 import java.io.File;
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -169,5 +170,37 @@ public class Server {
           
         
         return false;
+    }
+    
+    public void addEmployee(String name , String ic_passport , double rate){
+         String sql = "INSERT INTO Employee(name,hourly_rate,ic_passport) VALUES(?,?,?)";
+         try (Connection conn = this.connect();
+               PreparedStatement ps = conn.prepareStatement(sql)) {
+              
+               ps.setString(1,name);
+               ps.setDouble(2,rate);
+               ps.setString(3,ic_passport);
+               ps.executeUpdate();
+               
+          } catch (SQLException e) {
+              System.out.println(e.getMessage());
+        }
+    }
+
+    public List<EmployeeClass> getEmployee() {
+         String sql = "SELECT * FROM Employee";
+         List<EmployeeClass> res  = new ArrayList<>();
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 EmployeeClass temp = new EmployeeClass(rs.getString("name"), rs.getString("ic_passport"), rs.getDouble("hourly_rate"));
+                 res.add(temp);
+             }
+         }catch (Exception e){
+             
+         }
+         return res;
     }
 }

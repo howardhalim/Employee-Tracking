@@ -6,4 +6,6 @@ commons-codec-1.15/apidocs/package-list
 *.js
 *.css
 *.jar
-*.txt
+commons-codec-1.15/LICENSE.txt
+commons-codec-1.15/NOTICE.txt
+commons-codec-1.15/RELEASE-NOTES.txt
