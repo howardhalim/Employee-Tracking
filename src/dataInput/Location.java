@@ -4,8 +4,11 @@
  */
 package dataInput;
 
+import assignment.main.LocationObj;
 import java.awt.Color;
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -15,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author Steven-
  */
 public class Location extends javax.swing.JFrame {
-
+    private ArrayList<LocationObj> locList = new ArrayList<>();
     /**
      * Creates new form Location
      */
@@ -270,18 +273,34 @@ public class Location extends javax.swing.JFrame {
             }
             
             if (passed){
-                String detectedTime = detectedH + ":" + detectedM;
-                String scanTime = scanH + ":" + scanM;
-                // Pass data to server
-                boolean success = assignment.main.Server.addEmployeeLocation(employee, gateway, detectedTime, scanTime);
-                if (success){
-                    JOptionPane.showMessageDialog(this, "Location Added!");
+                LocationObj loc = new LocationObj();
+                loc.setEmployeeId(employee);
+                loc.setGatewayId(gateway);
+                loc.setDetectedTime(String.format("%02d", detectedH) + ":" + String.format("%02d", detectedM));
+                loc.setScanTime(String.format("%02d", scanH) + ":" + String.format("%02d", scanM));
+                locList.add(loc);
+
+                if (JOptionPane.showConfirmDialog(this, "Do you want to add more records?", "QUESTION",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    passed = false;
+                    employeeId.setText("");
+                    gatewayId.setText("");
+                    detectedHour.setText("");
+                    detectedMin.setText("");
+                    scanHour.setText("");
+                    scanMin.setText("");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed to add location.\nPlease try again!");
+                    // Pass data to server
+                    boolean success = assignment.main.Server.addEmployeeLocation(locList);
+                    if (success){
+                        JOptionPane.showMessageDialog(this, "Record(s) Added!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to add record.\nPlease try again!");
+                    }
+                    // Restart page
+                    this.dispose();
+                    new Location().setVisible(true);
                 }
-                // Restart page
-                this.dispose();
-                new Location().setVisible(true);
             } 
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Please input correctly!");

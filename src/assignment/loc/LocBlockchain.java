@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assignment.crypto;
+package assignment.loc;
 
+/**
+ *
+ * @author Steven-
+ */
 import com.google.gson.GsonBuilder;
 
 import java.io.*;
@@ -12,44 +16,35 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.LinkedList;
 
-public class Blockchain {
-    private static String chain;
-    private static String ledger;
+public class LocBlockchain {
 
-    public Blockchain(String chainFile, String ledgerFile) {
-        // chain: "master/Location.bin", ledger: "Location.txt"
-        //master-binary-file
-        this.chain = chainFile;
-        //ledger-file
-        this.ledger = ledgerFile;
-    }
-    
-    public static final String CHAIN_FILE = Blockchain.chain;
-    private static final String LEDGER_FILE = Blockchain.ledger;
-    
+    //master-binary-file
+    public static final String CHAIN_FILE = "master/location.bin";
     //data-structure
-    private static LinkedList<Block> DB = new LinkedList<>();
+    private static LinkedList<LocBlock> DB = new LinkedList<>();
+    //ledger-file
+    private static final String LEDGER_FILE = "location.txt";
 
     public static void genesis() {
-        Block genesis = new Block("0", 0);
+        LocBlock genesis = new LocBlock("0", 0);
         DB.add(genesis);
-        Blockchain.persist();
-        Blockchain.distribute();
+        LocBlockchain.persist();
+        LocBlockchain.distribute();
     }
 
-    public static void nextBlock(Block newBlock) {
+    public static void nextBlock(LocBlock newBlock) {
         DB = get();
         DB.add(newBlock);
-        Blockchain.persist();
+        LocBlockchain.persist();
     }
 
     // read the chain from master-file
-    public static LinkedList<Block> get() {
+    public static LinkedList<LocBlock> get() {
         try(
-                FileInputStream fin = new FileInputStream( CHAIN_FILE );
-                ObjectInputStream in = new ObjectInputStream( fin );
+            FileInputStream fin = new FileInputStream( CHAIN_FILE );
+            ObjectInputStream in = new ObjectInputStream( fin );
         ) {
-            return (LinkedList<Block>)in.readObject();
+            return (LinkedList<LocBlock>)in.readObject();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -82,5 +77,3 @@ public class Blockchain {
         }
     }
 }
-
-

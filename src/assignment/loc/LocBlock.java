@@ -2,18 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assignment.crypto;
+package assignment.loc;
 
+import assignment.crypto.Hasher;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Block implements Serializable{
+/**
+ *
+ * @author Steven-
+ */
+public class LocBlock implements Serializable{
     private Header header;
-    private Transaction tranx;
+    private LocTransaction transaction;
 
-    public Block(String previousHash, int index){
+    public LocBlock(String previousHash, int index){
         header = new Header();
         header.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
         header.setPreviousHash(previousHash);
@@ -41,20 +46,20 @@ public class Block implements Serializable{
         return header;
     }
 
-    public Transaction getTransaction() {
-        return tranx;
+    public LocTransaction getTransaction() {
+        return transaction;
     }
 
     //setter
-    public void setTransaction(Transaction tranx) {
-        this.tranx = tranx;
+    public void setTransaction(LocTransaction transaction) {
+        this.transaction = transaction;
     }
 
     @Override
     public String toString() {
-        return "Block{" +
+        return "LocBlock{" +
                 "header=" + header +
-                ", tranx=" + tranx +
+                ", transaction=" + transaction +
                 '}';
     }
 

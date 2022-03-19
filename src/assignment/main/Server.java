@@ -4,9 +4,11 @@
  */
 package assignment.main;
 
-import assignment.crypto.Blockchain;
 import assignment.ds.MySignature;
 import assignment.function.EmployeeClass;
+import assignment.loc.LocBlock;
+import assignment.loc.LocBlockchain;
+import assignment.loc.LocTransaction;
 import java.io.File;
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -72,32 +74,30 @@ public class Server {
         return data;
     }
     
-    // Blockchain
-    public static boolean addEmployeeLocation(String employee, String gateway, String detectedTime, String scanTime){
-        String chainFile = "master/Location.bin";
-        String ledgerFile = "Location.txt";
-        Blockchain chain = new Blockchain(chainFile, ledgerFile);
-        if (!(new File(chain.CHAIN_FILE)).exists()){
+    // Store at Blockchain
+    public static boolean addEmployeeLocation(ArrayList<LocationObj> locList){
+        if (!(new File(LocBlockchain.CHAIN_FILE)).exists()){
             new File("master").mkdir();
-            Blockchain.genesis();
-        } else {
-//            String tranx1 = "alice|bob|rm10";
-//            String tranx2 = "alice|bob|rm20";
-//
-//            Transaction tranxLst = new Transaction();
-//            tranxLst.add(tranx1);
-//            tranxLst.add(tranx2);
-//
-//            String prevhash = Blockchain.get().getLast().getHeader().getCurrentHash();
-//            int previndex = Blockchain.get().getLast().getHeader().getIndex();
-//            Block b = new Block(prevhash, previndex+1);
-//            b.setTransaction(tranxLst);
-//
-//
-//            Blockchain.nextBlock(b);
-//            Blockchain.distribute();
-//            new Transaction();
+            LocBlockchain.genesis();
         }
+        try{
+            LocTransaction transList = new LocTransaction();
+            for (LocationObj loc : locList){
+                transList.add(loc);
+            }
+            String prevhash = LocBlockchain.get().getLast().getHeader().getCurrentHash();
+            int previndex = LocBlockchain.get().getLast().getHeader().getIndex();
+            LocBlock b = new LocBlock(prevhash,previndex+1);
+            b.setTransaction(transList);
+            transList.setMerkleRoot();
+
+            LocBlockchain.nextBlock(b);
+            LocBlockchain.distribute(); 
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        
         return false;
     }
     

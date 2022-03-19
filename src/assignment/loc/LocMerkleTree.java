@@ -2,17 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assignment.crypto;
-
-import java.util.ArrayList;
-import java.util.List;
+package assignment.loc;
 
 /**
  *
  * @author Steven-
  */
-public class MerkleTree {
-    private List<String> tranxLst;
+import assignment.crypto.Hasher;
+import assignment.main.LocationObj;
+import java.util.ArrayList;
+import java.util.List;
+
+public class LocMerkleTree {
+    private List<LocationObj> tranxLst;
     private String root = "0";
 
     public String getRoot() {
@@ -21,64 +23,50 @@ public class MerkleTree {
 
     /**
      * @implNote
-     * Set the transaction list to the MerkleTree object.
+     * Set the transaction list to the LocMerkleTree object.
      *
      * @param tranxLst
      */
-    private MerkleTree(List<String> tranxLst) {
+    private LocMerkleTree(List<LocationObj> tranxLst) {
         super();
         this.tranxLst = tranxLst;
     }
     /**
      * Design pattern: Singleton
      */
-    private static MerkleTree instance;
-    public static MerkleTree getInstance( List<String> tranxLst ) {
+    private static LocMerkleTree instance;
+    public static LocMerkleTree getInstance(List<LocationObj> tranxLst ) {
         if( instance == null ) {
-            return new MerkleTree(tranxLst);
+            return new LocMerkleTree(tranxLst);
         }
         return instance;
     }
 
-    /**
-     * @implNote
-     * Build merkle tree
-     *
-     * @implSpec
-     * + build() : void
-     */
     public void build() {
 
         List<String> tempLst = new ArrayList<>();
 
-        for (String tranx : this.tranxLst) {
-            tempLst.add(tranx);
+        for (LocationObj tranx : this.tranxLst) {
+            tempLst.add(String.valueOf(tranx));
         }
 
         List<String> hashes = genTranxHashLst( tempLst );
         while(  hashes.size() != 1 ) {
             hashes = genTranxHashLst( hashes );
         }
-        this.root = hashes.get(0);
+        this.root = String.valueOf(hashes.get(0));
     }
 
-    /**
-     * @implNote
-     * Generate hashes of transactions
-     *
-     * @implSpec
-     * - genTranxHashLst(List<String>) : List<String>
-     */
     private List<String> genTranxHashLst(List<String> tranxLst) {
         List<String> hashLst = new ArrayList<>();
         int i = 0;
         while( i < tranxLst.size() ) {
 
-            String left = tranxLst.get(i);
+            String left = String.valueOf(tranxLst.get(i));
             i++;
 
             String right = "";
-            if( i != tranxLst.size() ) right = tranxLst.get(i);
+            if( i != tranxLst.size() ) right = String.valueOf(tranxLst.get(i));
 
             String hash = Hasher.hash(left.concat(right), "SHA-256");
             hashLst.add(hash);
