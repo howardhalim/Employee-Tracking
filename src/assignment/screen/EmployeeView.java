@@ -6,12 +6,9 @@
 package assignment.screen;
 
 import assignment.function.EmployeeClass;
-import assignment.main.Server;
-import static assignment.screen.GatewayView.GatewaySelected;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +22,6 @@ public class EmployeeView extends javax.swing.JFrame {
     public EmployeeView() {
         initComponents();
     }
-    public static EmployeeClass EmployeeSelected;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,65 +172,16 @@ public class EmployeeView extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int idx = jList1.getSelectedIndex();
-        if(idx == -1){
-          JOptionPane.showMessageDialog(this,
-                    "Data has not been selected!",
-                    "ERROR",
-                    JOptionPane.ERROR_MESSAGE
-            ); 
-        }
-        else{
-            EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
-        
-            new EmployeeEdit().setVisible(true);
-            this.setVisible(false);
-        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int idx = jList1.getSelectedIndex();
-        if(idx == -1){
-          JOptionPane.showMessageDialog(this,
-                    "Data has not been selected!",
-                    "ERROR",
-                    JOptionPane.ERROR_MESSAGE
-            ); 
-        }
-        else{
-            EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
-        
-            new EmployeeDetails().setVisible(true);
-            this.setVisible(false);
-        }
-        
-        
+        this.setVisible(false);
+        new EmployeeDetails().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        int idx = jList1.getSelectedIndex();
-        if(idx == -1){
-          JOptionPane.showMessageDialog(this,
-                    "Data has not been selected!",
-                    "ERROR",
-                    JOptionPane.ERROR_MESSAGE
-            ); 
-        }
-        else{
-            Server x = new Server();
-            EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
-            x.deleteEmployee(EmployeeSelected);
-            JOptionPane.showMessageDialog(this,
-                        "Delete Employee Successfully!",
-                        "DELETE SUCCESS",
-                        JOptionPane.INFORMATION_MESSAGE
-            );
-            assignment.main.Main.EmployeeList = x.getEmployee();
-            this.dispose();
-            new EmployeeView().setVisible(true);
-        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed

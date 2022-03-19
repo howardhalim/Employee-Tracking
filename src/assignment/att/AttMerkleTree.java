@@ -2,19 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assignment.loc;
+package assignment.att;
 
 /**
  *
  * @author Steven-
  */
+import assignment.loc.*;
 import assignment.crypto.Hasher;
-import assignment.function.LocationClass;
+import assignment.function.AttendanceClass;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocMerkleTree {
-    private List<LocationClass> tranxLst;
+public class AttMerkleTree {
+    private List<AttendanceClass> tranxLst;
     private String root = "0";
 
     public String getRoot() {
@@ -27,17 +28,17 @@ public class LocMerkleTree {
      *
      * @param tranxLst
      */
-    private LocMerkleTree(List<LocationClass> tranxLst) {
+    private AttMerkleTree(List<AttendanceClass> tranxLst) {
         super();
         this.tranxLst = tranxLst;
     }
     /**
      * Design pattern: Singleton
      */
-    private static LocMerkleTree instance;
-    public static LocMerkleTree getInstance(List<LocationClass> tranxLst ) {
+    private static AttMerkleTree instance;
+    public static AttMerkleTree getInstance(List<AttendanceClass> tranxLst ) {
         if( instance == null ) {
-            return new LocMerkleTree(tranxLst);
+            return new AttMerkleTree(tranxLst);
         }
         return instance;
     }
@@ -46,7 +47,7 @@ public class LocMerkleTree {
 
         List<String> tempLst = new ArrayList<>();
 
-        for (LocationClass tranx : this.tranxLst) {
+        for (AttendanceClass tranx : this.tranxLst) {
             tempLst.add(String.valueOf(tranx));
         }
 

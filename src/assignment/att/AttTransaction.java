@@ -2,33 +2,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assignment.loc;
+package assignment.att;
 
 /**
  *
  * @author Steven-
  */
-import assignment.function.LocationClass;
+import assignment.function.AttendanceClass;
+import assignment.loc.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LocTransaction implements Serializable {
+public class AttTransaction implements Serializable {
 
     private String merkleRoot;
 
-    private ArrayList<LocationClass> dataLst;
+    private ArrayList<AttendanceClass> dataLst;
 
-    public LocTransaction() {
+    public AttTransaction() {
         dataLst = new ArrayList<>( );
     }
 
 
-    public void add( LocationClass tranx ) {
+    public void add( AttendanceClass tranx ) {
         dataLst.add(tranx);
     }
 
     public void setMerkleRoot(){
-        LocMerkleTree mt = LocMerkleTree.getInstance(dataLst);
+        AttMerkleTree mt = AttMerkleTree.getInstance(dataLst);
         mt.build();
 
         String rootHash = mt.getRoot();
@@ -37,6 +38,6 @@ public class LocTransaction implements Serializable {
 
     @Override
     public String toString() {
-        return "LocTransaction [dataLst=" + dataLst + "]";
+        return "AttTransaction [dataLst=" + dataLst + "]";
     }
 }
