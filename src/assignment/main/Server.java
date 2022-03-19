@@ -4,8 +4,10 @@
  */
 package assignment.main;
 
+
 import assignment.ds.MySignature;
 import assignment.function.EmployeeClass;
+import assignment.function.LocationClass;
 import assignment.loc.LocBlock;
 import assignment.loc.LocBlockchain;
 import assignment.loc.LocTransaction;
@@ -75,14 +77,14 @@ public class Server {
     }
     
     // Store at Blockchain
-    public static boolean addEmployeeLocation(ArrayList<LocationObj> locList){
+    public static boolean addEmployeeLocation(ArrayList<LocationClass> locList){
         if (!(new File(LocBlockchain.CHAIN_FILE)).exists()){
             new File("master").mkdir();
             LocBlockchain.genesis();
         }
         try{
             LocTransaction transList = new LocTransaction();
-            for (LocationObj loc : locList){
+            for (LocationClass loc : locList){
                 transList.add(loc);
             }
             String prevhash = LocBlockchain.get().getLast().getHeader().getCurrentHash();
@@ -202,5 +204,120 @@ public class Server {
              
          }
          return res;
+    }
+    
+    public boolean checkGateway (String location){
+        
+        String sql = "SELECT * FROM Gateway";
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 String loc = rs.getString("location");
+                 if(loc.equals(location)){
+                     return false;
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+        
+        return true;
+    }
+    
+    public void addGateway(String location){
+        String sql = "INSERT INTO Gateway(location) VALUES(?)";
+        try (Connection conn = this.connect();
+               PreparedStatement ps = conn.prepareStatement(sql)) {
+              
+               ps.setString(1,location);
+               
+               ps.executeUpdate();
+               
+          } catch (SQLException e) {
+              System.out.println(e.getMessage());
+        }
+    }
+    public List<String> getGateway(){
+        String sql = "SELECT * FROM Gateway";
+         List<String> res  = new ArrayList<>();
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 String temp = rs.getString("location");
+                 res.add(temp);
+             }
+         }catch (Exception e){
+             
+         }
+         return res;
+    }
+    
+    public void deleleGateway(String location){
+        String sql = "DELETE FROM Gateway WHERE location = ?";
+         try (Connection conn = this.connect();
+                PreparedStatement ps = conn.prepareStatement(sql)){
+               ps.setString(1, location);
+               ps.executeUpdate();
+               
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void deleteEmployee(EmployeeClass emp){
+        String sql = "DELETE FROM Employee WHERE (name,ic_passport)  = (?,?)";
+         try (Connection conn = this.connect();
+                PreparedStatement ps = conn.prepareStatement(sql)){
+               ps.setString(1, emp.getName());
+               ps.setString(2, emp.getIc_passport());
+               ps.executeUpdate();
+               
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public int getEmployeeId(EmployeeClass emp) {
+         String sql = "SELECT * FROM Employee";
+         
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 if(rs.getString("name").equals(emp.getName()) && rs.getString("ic_passport").equals(emp.getIc_passport())){
+                     return rs.getInt("employee_id");
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+         return -1;
+    }
+    
+    public void editEmployee(String name , String ic_passport , double rate , int id){
+         String sql = "UPDATE Employee SET name = ? , "
+                + "ic_passport = ?, "
+                + "hourly_rate = ? "
+                + "WHERE employee_id = ?";
+
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setString(1, name);
+            pstmt.setString(2, ic_passport);
+            pstmt.setDouble(3, rate);
+            
+            
+            pstmt.setInt(4, id);
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

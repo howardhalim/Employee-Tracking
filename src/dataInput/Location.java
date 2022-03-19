@@ -4,7 +4,8 @@
  */
 package dataInput;
 
-import assignment.main.LocationObj;
+
+import assignment.function.LocationClass;
 import java.awt.Color;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Steven-
  */
 public class Location extends javax.swing.JFrame {
-    private ArrayList<LocationObj> locList = new ArrayList<>();
+    private ArrayList<LocationClass> locList = new ArrayList<>();
     /**
      * Creates new form Location
      */
@@ -273,7 +274,7 @@ public class Location extends javax.swing.JFrame {
             }
             
             if (passed){
-                LocationObj loc = new LocationObj();
+                LocationClass loc = new LocationClass();
                 loc.setEmployeeId(employee);
                 loc.setGatewayId(gateway);
                 loc.setDetectedTime(String.format("%02d", detectedH) + ":" + String.format("%02d", detectedM));

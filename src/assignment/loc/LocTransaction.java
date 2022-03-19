@@ -8,7 +8,8 @@ package assignment.loc;
  *
  * @author Steven-
  */
-import assignment.main.LocationObj;
+
+import assignment.function.LocationClass;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -18,14 +19,18 @@ public class LocTransaction implements Serializable {
 
     private String merkleRoot;
 
-    private ArrayList<LocationObj> dataLst;
+    private ArrayList<LocationClass> dataLst;
 
     public LocTransaction() {
         dataLst = new ArrayList<>( SIZE );
     }
 
+    public ArrayList<LocationClass> getDataLst() {
+        return dataLst;
+    }
 
-    public void add( LocationObj tranx ) {
+
+    public void add( LocationClass tranx ) {
         dataLst.add(tranx);
     }
 

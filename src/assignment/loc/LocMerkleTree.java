@@ -9,12 +9,13 @@ package assignment.loc;
  * @author Steven-
  */
 import assignment.crypto.Hasher;
-import assignment.main.LocationObj;
+import assignment.function.LocationClass;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocMerkleTree {
-    private List<LocationObj> tranxLst;
+    private List<LocationClass> tranxLst;
     private String root = "0";
 
     public String getRoot() {
@@ -27,7 +28,7 @@ public class LocMerkleTree {
      *
      * @param tranxLst
      */
-    private LocMerkleTree(List<LocationObj> tranxLst) {
+    private LocMerkleTree(List<LocationClass> tranxLst) {
         super();
         this.tranxLst = tranxLst;
     }
@@ -35,7 +36,7 @@ public class LocMerkleTree {
      * Design pattern: Singleton
      */
     private static LocMerkleTree instance;
-    public static LocMerkleTree getInstance(List<LocationObj> tranxLst ) {
+    public static LocMerkleTree getInstance(List<LocationClass> tranxLst ) {
         if( instance == null ) {
             return new LocMerkleTree(tranxLst);
         }
@@ -46,7 +47,7 @@ public class LocMerkleTree {
 
         List<String> tempLst = new ArrayList<>();
 
-        for (LocationObj tranx : this.tranxLst) {
+        for (LocationClass tranx : this.tranxLst) {
             tempLst.add(String.valueOf(tranx));
         }
 

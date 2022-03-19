@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package assignment.main;
+package assignment.function;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author Steven-
  */
-public class LocationObj implements Serializable {
+public class LocationClass implements Serializable {
     private String employeeId, gatewayId, detectedTime, scanTime;
 
     public String getEmployeeId() {
