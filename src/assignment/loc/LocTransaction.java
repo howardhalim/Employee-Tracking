@@ -15,14 +15,12 @@ import java.util.ArrayList;
 
 public class LocTransaction implements Serializable {
 
-    private final int SIZE = 10;
-
     private String merkleRoot;
 
     private ArrayList<LocationClass> dataLst;
 
     public LocTransaction() {
-        dataLst = new ArrayList<>( SIZE );
+        dataLst = new ArrayList<>( );
     }
 
     public ArrayList<LocationClass> getDataLst() {

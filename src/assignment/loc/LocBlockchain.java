@@ -46,7 +46,6 @@ public class LocBlockchain {
         ) {
             return (LinkedList<LocBlock>)in.readObject();
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -60,7 +59,6 @@ public class LocBlockchain {
             out.writeObject( DB );
             System.out.println( ">> Master file updated!" );
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -73,7 +71,7 @@ public class LocBlockchain {
             Files.write(Paths.get(LEDGER_FILE), chain.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+
         }
     }
 }
