@@ -11,10 +11,11 @@ import java.io.Serializable;
  * @author Steven-
  */
 public class AttendanceClass implements Serializable{
-    String employeeId, checkIn, checkOut, shift, lateStatus, date, workHours;
+    String employeeId, checkIn, checkOut, shift, lateStatus, date;
+    int workHours;
     boolean leaveStatus;
 
-    public AttendanceClass(String employeeId, String checkIn, String checkOut, String shift, String lateStatus, String date, String workHours, boolean leaveStatus) {
+    public AttendanceClass(String employeeId, String checkIn, String checkOut, String shift, String lateStatus, String date, int workHours, boolean leaveStatus) {
         this.employeeId = employeeId;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -73,11 +74,11 @@ public class AttendanceClass implements Serializable{
         this.date = date;
     }
 
-    public String getWorkHours() {
+    public int getWorkHours() {
         return workHours;
     }
 
-    public void setWorkHours(String workHours) {
+    public void setWorkHours(int workHours) {
         this.workHours = workHours;
     }
 

@@ -23,6 +23,9 @@ public class AttTransaction implements Serializable {
         dataLst = new ArrayList<>( );
     }
 
+    public ArrayList<AttendanceClass> getDataLst() {
+        return dataLst;
+    }
 
     public void add( AttendanceClass tranx ) {
         dataLst.add(tranx);

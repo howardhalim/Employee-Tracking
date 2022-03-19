@@ -5,6 +5,8 @@
  */
 package assignment.screen;
 
+import dataInput.Payslip;
+
 /**
  *
  * @author howard
@@ -17,6 +19,7 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
     }
+    public static Payslip pay;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +35,7 @@ public class MainPage extends javax.swing.JFrame {
         Attendance = new javax.swing.JButton();
         Location = new javax.swing.JButton();
         Performance = new javax.swing.JButton();
-        Payslip = new javax.swing.JButton();
+        PayslipButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -70,8 +73,13 @@ public class MainPage extends javax.swing.JFrame {
         Performance.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         Performance.setText("Performance");
 
-        Payslip.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        Payslip.setText("Payslip");
+        PayslipButton.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        PayslipButton.setText("Payslip");
+        PayslipButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayslipButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("WELCOME TO EMPLOYEE-TRACKING SYSTEM");
@@ -111,7 +119,7 @@ public class MainPage extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Payslip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PayslipButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Performance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Location, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Attendance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +146,7 @@ public class MainPage extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Payslip, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(PayslipButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
@@ -198,6 +206,12 @@ public class MainPage extends javax.swing.JFrame {
         new GatewayView().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void PayslipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayslipButtonActionPerformed
+        pay = new Payslip();
+        pay.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_PayslipButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,7 +251,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton Attendance;
     private javax.swing.JButton Employee;
     private javax.swing.JButton Location;
-    private javax.swing.JButton Payslip;
+    private javax.swing.JButton PayslipButton;
     private javax.swing.JButton Performance;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

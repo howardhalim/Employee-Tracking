@@ -6,6 +6,7 @@
 package assignment.main;
 
 import assignment.ds.MySignature;
+import assignment.function.AttendanceClass;
 import assignment.function.EmployeeClass;
 import assignment.function.GatewayClass;
 import assignment.function.LocationClass;
@@ -31,11 +32,11 @@ public class Main {
    public static MainPage main = new MainPage();
    public static List<EmployeeClass> EmployeeList;
    public static List<GatewayClass> GatewayList;
-    public static void main(String[] args) throws Exception {
+   public static void main(String[] args) throws Exception {
         Server x = new Server();
         EmployeeList = x.getEmployee();
         GatewayList = x.getGateway();
-        System.out.println(GatewayList);
+//        System.out.println(GatewayList);
         assignment.screen.LoginPage res = new assignment.screen.LoginPage();
         res.setVisible(true);
         

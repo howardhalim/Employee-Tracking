@@ -16,6 +16,7 @@ import assignment.function.LocationClass;
 import assignment.loc.LocBlock;
 import assignment.loc.LocBlockchain;
 import assignment.loc.LocTransaction;
+import assignment.screen.AttendanceView;
 import java.io.File;
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -235,6 +236,55 @@ public class Server {
              
          }
          return res;
+    }
+    
+    public List<AttendanceClass> getAttendance(){
+        //System.out.println(LocBlockchain.get());
+        List<AttBlock> allData = AttBlockchain.get();
+        List<AttendanceClass> attList = new ArrayList<>();
+        System.out.println(allData);
+//        EmployeeClass EmployeeSelected = AttendanceView.EmployeeSelected;
+//        List<AttendanceClass> attlist = new ArrayList<>();
+//        String id = EmployeeSelected.getName();
+//        System.out.println(id);
+//        System.out.println(allData);
+        for(AttBlock s : allData){
+            int idx = s.getHeader().getIndex();
+            if(idx!=0){
+                AttTransaction temp = s.getTransaction();
+                System.out.println("QQ" + temp);
+                for(int i = 0 ;i< temp.getDataLst().size();i++){
+                    System.out.println(temp.getDataLst().get(i));
+                    attList.add(temp.getDataLst().get(i));
+                }
+            }
+        }
+        return attList;
+        //List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+        //String[] name = new String[emp.size()];
+        //for(int i = 0;i<emp.size();i++){
+        //    name[i] = emp.get(i).getName();
+        //}
+        //jList1.setListData(name);
+    }
+    
+    public List<LocationClass> getLocation(){
+        List<LocBlock> allData = LocBlockchain.get();
+        List<LocationClass> loclist = new ArrayList<>();
+        System.out.println(allData);
+
+        for(LocBlock s : allData){
+            int idx = s.getHeader().getIndex();
+            if(idx!=0){
+                LocTransaction temp = s.getTransaction();
+                System.out.println("QQ" + temp);
+                for(int i = 0 ;i< temp.getDataLst().size();i++){
+                    System.out.println(temp.getDataLst().get(i));
+                    loclist.add(temp.getDataLst().get(i));
+                }
+            }
+        }
+        return loclist;
     }
     
     public boolean checkGateway (String gatewayid){

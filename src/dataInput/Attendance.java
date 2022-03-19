@@ -468,14 +468,13 @@ public class Attendance extends javax.swing.JFrame {
     private void attSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attSubmitActionPerformed
         try{
             boolean validTime = false;
-            boolean validShift = false;
-            boolean validYear = true;
+            boolean validShift = true;
             boolean passed = false;
             String checkIn = "-";
             String checkOut = "-";
-            String lateStatus = "-";
+            String lateStatus = "On Time";
             String shift = "-";
-            String workHours = "-";
+            int workHours = 0;
             String date;
             // Get Form data
             String employee = selectedEmployee.getText();
@@ -510,19 +509,16 @@ public class Attendance extends javax.swing.JFrame {
                 // Late status (Morning: 7-12, Afternoon 13-18)
                 if((shift == "Morning" && inH >= 7 && inM > 00) || (shift == "Afternoon" && inH >= 13 && inM > 00)){
                     lateStatus = "Late";
-                } else if ((shift == "Morning" && (inH > 12) || inH < 7)){
+                } if ((shift == "Morning" && inH > 12)){
                     validShift = false;
-                } else if ((shift == "Afternoon" && (inH > 18) || inH < 13)){
+                } if ((shift == "Afternoon" && (inH > 18))){
                     validShift = false;
-                } else {
-                    lateStatus = "On Time";
-                    validShift = true;
-                }
+                } 
 
                 // workHours
                 int workH = outH - inH;
-                int workM = outM - inM;
-                workHours = String.format("%02d", workH) + " Hours " + String.format("%02d", workM) + " Mins";
+                workHours = parseInt(String.format("%02d", workH));
+
                 if (validTime && validShift){
                     passed = true;
                 }

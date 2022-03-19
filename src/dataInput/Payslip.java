@@ -4,12 +4,36 @@
  */
 package dataInput;
 
+import assignment.function.AttendanceClass;
+import assignment.function.EmployeeClass;
+import assignment.function.LocationClass;
+import assignment.main.Server;
+import assignment.screen.PayslipView;
+import static java.lang.Integer.parseInt;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Steven-
  */
 public class Payslip extends javax.swing.JFrame {
-
+    Server x = new Server();
+    
+    List<EmployeeClass> listEmp;
+    List<AttendanceClass> listAtt;
+    List<LocationClass> listLoc;
+    
+    public static int totalWorkHours = 0;
+    public static int totalOvertime = 0;
+    public static double hourlyRate = 0;
+    public static double overtimePay;
+    public static double totalPay;
+    public static String employeeName;
+    public static String month;
+    public static String payDate;
+    public static String empId;
+    public static int year;
     /**
      * Creates new form Attendance
      */
@@ -28,6 +52,19 @@ public class Payslip extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         back = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        paySelect = new javax.swing.JButton();
+        paySubmit = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        payYear = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        payMonth = new javax.swing.JComboBox<>();
+        selectedEmp = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        empList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,19 +80,153 @@ public class Payslip extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PAYSLIP RECORD");
+
+        paySelect.setText("Select");
+        paySelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paySelectActionPerformed(evt);
+            }
+        });
+
+        paySubmit.setText("Submit");
+        paySubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paySubmitActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(173, 216, 230));
+
+        jLabel4.setText("Year");
+
+        jLabel3.setText("Month");
+
+        payMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        payMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payMonthActionPerformed(evt);
+            }
+        });
+
+        selectedEmp.setEditable(false);
+        selectedEmp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel2.setText("Selected Employee");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(payYear, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(payMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(selectedEmp)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel2)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectedEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(payMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(payYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(173, 216, 230));
+
+        jScrollPane1.setViewportView(empList);
+        List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+        String[] name = new String[emp.size()];
+        for(int i = 0;i<emp.size();i++){
+            name[i] = emp.get(i).getName();
+        }
+        empList.setListData(name);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 337, Short.MAX_VALUE))
+                .addGap(69, 69, 69)
+                .addComponent(paySelect)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(paySubmit))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 243, Short.MAX_VALUE)
-                .addComponent(back))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(paySelect)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(back))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(paySubmit)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -64,15 +235,15 @@ public class Payslip extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,6 +255,76 @@ public class Payslip extends javax.swing.JFrame {
         this.dispose();
         assignment.main.Main.main.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
+
+    private void paySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paySelectActionPerformed
+       try{
+            String listVal = empList.getSelectedValue();
+            if(listVal == null){
+                JOptionPane.showMessageDialog(this, "Please choose an employee!");
+            } else{
+                selectedEmp.setText(listVal);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Oops! There is something wrong.");
+        }
+    }//GEN-LAST:event_paySelectActionPerformed
+
+    private void payMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payMonthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_payMonthActionPerformed
+
+    private void paySubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paySubmitActionPerformed
+        try{
+            // Get employee data from db
+            listEmp = x.getEmployee();
+
+            // Get attendance & location data from blockchain
+            listAtt = x.getAttendance();
+            listLoc = x.getLocation();
+        } catch (Exception e){
+            System.out.println("Oops! The data is empty or error.");
+        }
+        
+        try{
+            // totalPay (calculate total)
+            employeeName = selectedEmp.getText();
+            month = (String) payMonth.getSelectedItem();
+            year = parseInt(payYear.getText());
+            // compare Month-YYYY dari blockchain, bisa pakai split string
+            payDate = month + "-" + year;
+
+            // Get hourlyRate data from database
+            for(int i = 0; i < listEmp.size(); i++){
+                EmployeeClass e = listEmp.get(i);
+                if(listEmp.get(i).getName().equals(employeeName)){
+                    hourlyRate = e.getHourly_rate();
+                }
+            }
+
+            // totalWorkHours, totalOvertime, overtimePay from blockchain
+            for(int j = 0; j < listAtt.size(); j++){
+                AttendanceClass e = listAtt.get(j);
+                if (e.getDate().contains(payDate)){
+                    if(listAtt.get(j).getEmployeeId().equals(employeeName)){
+                        empId = e.getEmployeeId();
+                        totalWorkHours = totalWorkHours + e.getWorkHours();
+                        if (e.getWorkHours()-5 > 0){
+                            totalOvertime = totalOvertime + (e.getWorkHours()-5);
+                        } 
+                    }
+                }
+            }
+
+            // calculate here
+            overtimePay = Math.round((hourlyRate*totalOvertime*1.5)*100.0)/100.0;
+            totalPay = Math.round((totalWorkHours * hourlyRate + overtimePay)*100.0)/100.0; 
+            
+            new PayslipView().setVisible(true);
+            this.setVisible(false);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Please input correctly!");
+        }
+    }//GEN-LAST:event_paySubmitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,6 +364,19 @@ public class Payslip extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JList<String> empList;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> payMonth;
+    private javax.swing.JButton paySelect;
+    private javax.swing.JButton paySubmit;
+    private javax.swing.JTextField payYear;
+    private javax.swing.JTextField selectedEmp;
     // End of variables declaration//GEN-END:variables
 }
