@@ -166,11 +166,14 @@ public class EmployeeLocation extends javax.swing.JFrame {
             if(idx!=0){
                 LocTransaction temp = s.getTransaction();
                 
-                String idS = temp.getDataLst().get(0).getEmployeeId();
-                if(id.equals(idS)){
-                    locationList.add(temp.getDataLst().get(0));
-                    System.out.println(temp.getDataLst().get(0).getEmployeeId());
+                for(int i = 0 ;i< temp.getDataLst().size();i++){
+                    String idS = temp.getDataLst().get(i).getEmployeeId();
+                    if(id.equals(idS)){
+                        locationList.add(temp.getDataLst().get(i));
+                        System.out.println(temp.getDataLst().get(i).getEmployeeId());
+                    }
                 }
+               
                 
             }
             

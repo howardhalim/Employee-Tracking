@@ -26,6 +26,9 @@ public class AttendanceClass implements Serializable{
         this.leaveStatus = leaveStatus;
     }
 
+    public AttendanceClass() {
+    }
+
     public String getEmployeeId() {
         return employeeId;
     }

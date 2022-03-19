@@ -19,6 +19,7 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
     }
+    public static PerformanceView perf;
     public static Payslip pay;
 
     /**
@@ -72,6 +73,11 @@ public class MainPage extends javax.swing.JFrame {
 
         Performance.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         Performance.setText("Performance");
+        Performance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PerformanceActionPerformed(evt);
+            }
+        });
 
         PayslipButton.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         PayslipButton.setText("Payslip");
@@ -206,6 +212,12 @@ public class MainPage extends javax.swing.JFrame {
         new GatewayView().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void PerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerformanceActionPerformed
+        // TODO add your handling code here:
+        perf = new PerformanceView();
+        perf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_PerformanceActionPerformed
     private void PayslipButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayslipButtonActionPerformed
         pay = new Payslip();
         pay.setVisible(true);

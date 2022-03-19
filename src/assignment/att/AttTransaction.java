@@ -9,6 +9,7 @@ package assignment.att;
  * @author Steven-
  */
 import assignment.function.AttendanceClass;
+import assignment.function.LocationClass;
 import assignment.loc.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ public class AttTransaction implements Serializable {
     public AttTransaction() {
         dataLst = new ArrayList<>( );
     }
-
     public ArrayList<AttendanceClass> getDataLst() {
         return dataLst;
     }
