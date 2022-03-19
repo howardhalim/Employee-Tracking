@@ -10,6 +10,7 @@ package assignment.loc;
  */
 import assignment.crypto.Hasher;
 import assignment.function.LocationClass;
+
 import java.util.ArrayList;
 import java.util.List;
 

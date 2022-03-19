@@ -8,6 +8,7 @@ package assignment.loc;
  *
  * @author Steven-
  */
+
 import assignment.function.LocationClass;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,6 +21,10 @@ public class LocTransaction implements Serializable {
 
     public LocTransaction() {
         dataLst = new ArrayList<>( );
+    }
+
+    public ArrayList<LocationClass> getDataLst() {
+        return dataLst;
     }
 
 

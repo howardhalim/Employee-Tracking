@@ -4,13 +4,15 @@
  */
 package assignment.main;
 
+
 import assignment.att.AttBlock;
 import assignment.att.AttBlockchain;
 import assignment.att.AttTransaction;
-import assignment.function.LocationClass;
 import assignment.ds.MySignature;
 import assignment.function.AttendanceClass;
 import assignment.function.EmployeeClass;
+import assignment.function.GatewayClass;
+import assignment.function.LocationClass;
 import assignment.loc.LocBlock;
 import assignment.loc.LocBlockchain;
 import assignment.loc.LocTransaction;
@@ -106,7 +108,7 @@ public class Server {
         return false;
     }
     
-    // Store at Blockchain
+        // Store at Blockchain
     public static boolean addEmployeeAttendance(ArrayList<AttendanceClass> attList){
         if (!(new File(AttBlockchain.CHAIN_FILE)).exists()){
             new File("master").mkdir();
@@ -233,5 +235,157 @@ public class Server {
              
          }
          return res;
+    }
+    
+    public boolean checkGateway (String gatewayid){
+        
+        String sql = "SELECT * FROM Gateway";
+        try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 String loc = rs.getString("gateway_id");
+                 if(loc.equals(gatewayid)){
+                     return false;
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+        
+        return true;
+    }
+    
+    public void addGateway(String gateway_id, String location){
+        String sql = "INSERT INTO Gateway(gateway_id, location) VALUES(?,?)";
+        try (Connection conn = this.connect();
+               PreparedStatement ps = conn.prepareStatement(sql)) {
+              
+               ps.setString(1,gateway_id);
+               ps.setString(2,location);
+               
+               ps.executeUpdate();
+               
+          } catch (SQLException e) {
+              System.out.println(e.getMessage());
+        }
+    }
+    public List<GatewayClass> getGateway(){
+        String sql = "SELECT * FROM Gateway";
+         List<GatewayClass> res  = new ArrayList<>();
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 String id = rs.getString("gateway_id");
+                 String temp = rs.getString("location");
+                 GatewayClass te = new GatewayClass(id,temp);
+                 res.add(te);
+             }
+         }catch (Exception e){
+             
+         }
+         return res;
+    }
+    
+    public void deleleGateway(String gateway_id){
+        String sql = "DELETE FROM Gateway WHERE gateway_id = ?";
+         try (Connection conn = this.connect();
+                PreparedStatement ps = conn.prepareStatement(sql)){
+               ps.setString(1, gateway_id);
+               ps.executeUpdate();
+               
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void deleteEmployee(EmployeeClass emp){
+        String sql = "DELETE FROM Employee WHERE (name,ic_passport)  = (?,?)";
+         try (Connection conn = this.connect();
+                PreparedStatement ps = conn.prepareStatement(sql)){
+               ps.setString(1, emp.getName());
+               ps.setString(2, emp.getIc_passport());
+               ps.executeUpdate();
+               
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public int getEmployeeId(EmployeeClass emp) {
+         String sql = "SELECT * FROM Employee";
+         
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 if(rs.getString("name").equals(emp.getName()) && rs.getString("ic_passport").equals(emp.getIc_passport())){
+                     return rs.getInt("employee_id");
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+         return -1;
+    }
+    
+    public void editEmployee(String name , String ic_passport , double rate , int id){
+         String sql = "UPDATE Employee SET name = ? , "
+                + "ic_passport = ?, "
+                + "hourly_rate = ? "
+                + "WHERE employee_id = ?";
+
+        try (Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setString(1, name);
+            pstmt.setString(2, ic_passport);
+            pstmt.setDouble(3, rate);
+            
+            
+            pstmt.setInt(4, id);
+            // update 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public String getGatewayId(String GatewaySelected) {
+        String sql = "SELECT * FROM Gateway";
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 if(rs.getString("gateway_id").equals(GatewaySelected)){
+                     return rs.getString("gateway_id");
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+         return null;
+    }
+
+    public String getGatewayName(String gatewayId) {
+        String sql = "SELECT * FROM Gateway";
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 if(rs.getString("gateway_id").equals(gatewayId)){
+                     return rs.getString("location");
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+         return null;
     }
 }

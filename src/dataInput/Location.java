@@ -4,7 +4,13 @@
  */
 package dataInput;
 
+
+import assignment.function.EmployeeClass;
+import assignment.function.GatewayClass;
 import assignment.function.LocationClass;
+import assignment.main.Server;
+import assignment.screen.EmployeeEdit;
+import static assignment.screen.EmployeeView.EmployeeSelected;
 import java.awt.Color;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
@@ -37,10 +43,6 @@ public class Location extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        employeeId = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        gatewayId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         scanMin = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -51,6 +53,12 @@ public class Location extends javax.swing.JFrame {
         detectedMin = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        EmployeeList = new javax.swing.JList<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        GatewayList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -60,22 +68,6 @@ public class Location extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("EMPLOYEE LOCATION INPUT");
-
-        employeeId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeIdActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Employee ID");
-
-        jLabel3.setText("Gateway ID");
-
-        gatewayId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gatewayIdActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Detected Time");
 
@@ -138,6 +130,28 @@ public class Location extends javax.swing.JFrame {
             }
         });
 
+        EmployeeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(EmployeeList);
+        List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+        String[] name = new String[emp.size()];
+        for(int i = 0;i<emp.size();i++){
+            name[i] = emp.get(i).getName();
+        }
+        EmployeeList.setListData(name);
+
+        jLabel8.setText("Employee");
+
+        jLabel9.setText("Gateway");
+
+        GatewayList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(GatewayList);
+        List<GatewayClass> gate = assignment.main.Main.GatewayList;
+        String[] loc = new String[gate.size()];
+        for(int i = 0;i<gate.size();i++){
+            loc[i] = gate.get(i).getLocation();
+        }
+        GatewayList.setListData(loc);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -145,55 +159,57 @@ public class Location extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(submit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addGap(37, 37, 37)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(detectedHour, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                                            .addComponent(scanHour))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(scanMin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(detectedMin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(gatewayId)))
+                                    .addComponent(detectedHour)
+                                    .addComponent(scanHour, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(46, 46, 46)
-                                .addComponent(employeeId)))))
-                .addGap(87, 87, 87))
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(scanMin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(detectedMin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(employeeId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(gatewayId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel8)
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(detectedHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,7 +221,7 @@ public class Location extends javax.swing.JFrame {
                     .addComponent(scanHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(scanMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addComponent(submit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(back))
@@ -224,7 +240,7 @@ public class Location extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -233,14 +249,6 @@ public class Location extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void employeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_employeeIdActionPerformed
-
-    private void gatewayIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gatewayIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gatewayIdActionPerformed
 
     private void scanMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scanMinActionPerformed
         // TODO add your handling code here:
@@ -253,66 +261,74 @@ public class Location extends javax.swing.JFrame {
     private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
         try {
             boolean passed = false;
-            String status = "Online";
             // Get Form data
-            String employee = employeeId.getText();
-            String gateway = gatewayId.getText();
-            int detectedH = parseInt(detectedHour.getText());
-            int detectedM = parseInt(detectedMin.getText());
-            int scanH = parseInt(scanHour.getText());
-            int scanM = parseInt(scanMin.getText());
-            
-            // Validate time input (daily)
-            if (detectedH > 23 || detectedH < 0 || scanH > 23 || scanH < 0){
-                JOptionPane.showMessageDialog(this, "Invalid Hour!\nPlease input from 00 to 23");
-            } else if (detectedM > 59 || detectedM < 0 || scanM > 59 || scanM < 0){
-                JOptionPane.showMessageDialog(this, "Invalid Minute!\nPlease input from 00 to 59");
-            } else if (scanH < detectedH || (scanH == detectedH && scanM < detectedM)){
-                JOptionPane.showMessageDialog(this, "Employee detected time shouldn't exceed scan time!");
-            } else {
-                passed = true;
+            int idx = EmployeeList.getSelectedIndex();
+            int idx2 = GatewayList.getSelectedIndex();
+            if(idx == -1 || idx2 == -1){
+              JOptionPane.showMessageDialog(this,
+                        "Data has not been selected!",
+                        "ERROR",
+                        JOptionPane.ERROR_MESSAGE
+                ); 
             }
-            
-            if (passed){
-                LocationClass loc = new LocationClass();
-                loc.setEmployeeId(employee);
-                loc.setGatewayId(gateway);
-                loc.setDetectedTime(String.format("%02d", detectedH) + ":" + String.format("%02d", detectedM));
-                loc.setScanTime(String.format("%02d", scanH) + ":" + String.format("%02d", scanM));
-                // duration in minutes
-                int duration = (scanH-detectedH) + Math.abs(scanM-detectedM);
-                // 30 mins = away
-                if (duration > 30){
-                    status = "Away";
-                }
-                
-                locList.add(loc);
+            else{
+                Server x = new Server();
+                EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+                GatewayClass GatewaySelected = assignment.main.Main.GatewayList.get(idx2);
+                String employee = String.valueOf(x.getEmployeeId(EmployeeSelected));
+                String gateway = String.valueOf(GatewaySelected.getGateway_id());
+//                String employee = employeeId.getText();
+//                String gateway = gatewayId.getText();
+                int detectedH = parseInt(detectedHour.getText());
+                int detectedM = parseInt(detectedMin.getText());
+                int scanH = parseInt(scanHour.getText());
+                int scanM = parseInt(scanMin.getText());
 
-                if (JOptionPane.showConfirmDialog(this, "Do you want to add more records?", "QUESTION",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    passed = false;
-                    employeeId.setText("");
-                    gatewayId.setText("");
-                    detectedHour.setText("");
-                    detectedMin.setText("");
-                    scanHour.setText("");
-                    scanMin.setText("");
+                // Validate time input (daily)
+                if (detectedH > 23 || detectedH < 0 || scanH > 23 || scanH < 0){
+                    JOptionPane.showMessageDialog(this, "Invalid Hour!\nPlease input from 00 to 23");
+                } else if (detectedM > 59 || detectedM < 0 || scanM > 59 || scanM < 0){
+                    JOptionPane.showMessageDialog(this, "Invalid Minute!\nPlease input from 00 to 59");
+                } else if (scanH < detectedH || (scanH == detectedH && scanM < detectedM)){
+                    JOptionPane.showMessageDialog(this, "Employee detected time shouldn't exceed scan time!");
                 } else {
-                    // Pass data to server
-                    boolean success = assignment.main.Server.addEmployeeLocation(locList);
-                    if (success){
-                        JOptionPane.showMessageDialog(this, "Record(s) Added!");
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Failed to add record.\nPlease try again!");
-                    }
-                    // Restart page
-                    this.dispose();
-                    new Location().setVisible(true);
+                    passed = true;
                 }
-            } 
-        } catch (Exception e){
+
+                if (passed){
+                    LocationClass loc = new LocationClass();
+                    loc.setEmployeeId(employee);
+                    loc.setGatewayId(gateway);
+                    loc.setDetectedTime(String.format("%02d", detectedH) + ":" + String.format("%02d", detectedM));
+                    loc.setScanTime(String.format("%02d", scanH) + ":" + String.format("%02d", scanM));
+                    locList.add(loc);
+
+                    if (JOptionPane.showConfirmDialog(this, "Do you want to add more records?", "QUESTION",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        passed = false;
+                        detectedHour.setText("");
+                        detectedMin.setText("");
+                        scanHour.setText("");
+                        scanMin.setText("");
+                    } else {
+                        // Pass data to server
+                        boolean success = assignment.main.Server.addEmployeeLocation(locList);
+                        if (success){
+                            JOptionPane.showMessageDialog(this, "Record(s) Added!");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Failed to add record.\nPlease try again!");
+                        }
+                        // Restart page
+                        this.dispose();
+                        new Location().setVisible(true);
+                    }
+                } 
+            }    
+        }
+        catch (Exception e){
             JOptionPane.showMessageDialog(this, "Please input correctly!");
         }
+            
     }//GEN-LAST:event_submitActionPerformed
 
     private void detectedMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detectedMinActionPerformed
@@ -363,19 +379,21 @@ public class Location extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> EmployeeList;
+    private javax.swing.JList<String> GatewayList;
     private javax.swing.JButton back;
     private javax.swing.JTextField detectedHour;
     private javax.swing.JTextField detectedMin;
-    private javax.swing.JTextField employeeId;
-    private javax.swing.JTextField gatewayId;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField scanHour;
     private javax.swing.JTextField scanMin;
     private javax.swing.JButton submit;
