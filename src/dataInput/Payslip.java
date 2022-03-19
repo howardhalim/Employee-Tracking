@@ -26,7 +26,7 @@ public class Payslip extends javax.swing.JFrame {
     
     public static int totalWorkHours = 0;
     public static int totalOvertime = 0;
-    public static double hourlyRate = 0;
+    public static double hourlyRate;
     public static double overtimePay;
     public static double totalPay;
     public static String employeeName;
@@ -34,6 +34,7 @@ public class Payslip extends javax.swing.JFrame {
     public static String payDate;
     public static String empId;
     public static int year;
+    boolean selected = false;
     /**
      * Creates new form Attendance
      */
@@ -258,12 +259,28 @@ public class Payslip extends javax.swing.JFrame {
 
     private void paySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paySelectActionPerformed
        try{
-            String listVal = empList.getSelectedValue();
-            if(listVal == null){
-                JOptionPane.showMessageDialog(this, "Please choose an employee!");
-            } else{
-                selectedEmp.setText(listVal);
+            int idx = empList.getSelectedIndex();
+        
+        
+            if(idx==-1){
+                JOptionPane.showMessageDialog(this,
+                        "Data has not been selected!",
+                        "ERROR",
+                        JOptionPane.ERROR_MESSAGE
+                ); 
             }
+            else{
+                
+                employeeName = assignment.main.Main.EmployeeList.get(idx).getName();
+                 
+                if(employeeName == null){
+                    JOptionPane.showMessageDialog(this, "Please choose an employee!");
+                    selected = false;
+                }
+                selected = true;
+                selectedEmp.setText(employeeName);
+            }
+            
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, "Oops! There is something wrong.");
         }
@@ -287,6 +304,10 @@ public class Payslip extends javax.swing.JFrame {
         
         try{
             // totalPay (calculate total)
+            totalWorkHours = 0;
+            totalOvertime = 0;
+            overtimePay = 0;
+            totalPay = 0;
             employeeName = selectedEmp.getText();
             month = (String) payMonth.getSelectedItem();
             year = parseInt(payYear.getText());
@@ -319,8 +340,21 @@ public class Payslip extends javax.swing.JFrame {
             overtimePay = Math.round((hourlyRate*totalOvertime*1.5)*100.0)/100.0;
             totalPay = Math.round((totalWorkHours * hourlyRate + overtimePay)*100.0)/100.0; 
             
-            new PayslipView().setVisible(true);
-            this.setVisible(false);
+            
+            if(selected){
+                new PayslipView().setVisible(true);
+                this.setVisible(false);
+            }
+            else{
+                JOptionPane.showMessageDialog(this,
+                        "Data has not been selected!",
+                        "ERROR",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
+            
+            
+            
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Please input correctly!");
         }

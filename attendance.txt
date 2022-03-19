@@ -2,20 +2,20 @@
   {
     "header": {
       "index": 0,
-      "currentHash": "cad76e47bb513d85b6197e338dc5f47e82ecca01326d76f1b1643981ec872c99",
+      "currentHash": "6b827686e2f01bfc2d626e6016e5bc81b3db6e44f41b62e71391afd01733e20b",
       "previousHash": "0",
-      "timestamp": 1647715139304
+      "timestamp": 1647719058789
     }
   },
   {
     "header": {
       "index": 1,
-      "currentHash": "724e7966dbe3c6f82c70b55245c2dd93d9b2c2088d52a695a1f46ab3cc3fc003",
-      "previousHash": "cad76e47bb513d85b6197e338dc5f47e82ecca01326d76f1b1643981ec872c99",
-      "timestamp": 1647715139364
+      "currentHash": "984eaae73d4efd5466e5ad814f2fa7d9ef6eeab1b97c6db07ca73b6faa9dbe8f",
+      "previousHash": "6b827686e2f01bfc2d626e6016e5bc81b3db6e44f41b62e71391afd01733e20b",
+      "timestamp": 1647719058842
     },
     "transaction": {
-      "merkleRoot": "6f7487151164c59e5601f040e645b3521b999e65d16333963f2c1626e0ec8221",
+      "merkleRoot": "509f2f82476508136e5399a265611420235f0ddf829bb56f92f4a56618241bd1",
       "dataLst": [
         {
           "employeeId": "Howard Halim",
@@ -39,12 +39,22 @@
         },
         {
           "employeeId": "Howard Halim",
-          "checkIn": "07:05",
-          "checkOut": "14:00",
-          "shift": "Morning",
-          "lateStatus": "Late",
-          "date": "14-January-2022",
-          "workHours": 7,
+          "checkIn": "-",
+          "checkOut": "-",
+          "shift": "-",
+          "lateStatus": "-",
+          "date": "14-February-2022",
+          "workHours": 0,
+          "leaveStatus": true
+        },
+        {
+          "employeeId": "Steven Steven",
+          "checkIn": "14:00",
+          "checkOut": "20:00",
+          "shift": "Afternoon",
+          "lateStatus": "OnTime",
+          "date": "14-February-2022",
+          "workHours": 6,
           "leaveStatus": false
         }
       ]
@@ -53,43 +63,37 @@
   {
     "header": {
       "index": 2,
-      "currentHash": "32c67f90b39feb4825a02da1e153ba50a36c6b2d29ac627a3ba40ef8fba96b5d",
-      "previousHash": "724e7966dbe3c6f82c70b55245c2dd93d9b2c2088d52a695a1f46ab3cc3fc003",
-      "timestamp": 1647715148088
+      "currentHash": "f9bf769126208b090a4b88e20d848ceec8500526b2acf3e2ba4daf9d1a7b6cf8",
+      "previousHash": "984eaae73d4efd5466e5ad814f2fa7d9ef6eeab1b97c6db07ca73b6faa9dbe8f",
+      "timestamp": 1647719106199
     },
     "transaction": {
-      "merkleRoot": "ca1a65df0c5f0809eb1de90797c096418e6c0896c589494daf3b03199cf73798",
-      "dataLst": [
-        {
-          "employeeId": "Steven Steven",
-          "checkIn": "-",
-          "checkOut": "-",
-          "shift": "-",
-          "lateStatus": "-",
-          "date": "12-January-2022",
-          "workHours": 0,
-          "leaveStatus": true
-        }
-      ]
-    }
-  },
-  {
-    "header": {
-      "index": 3,
-      "currentHash": "f43c1c5f485f54609eee3966a92c0f58c340c494db63bfe9646cc15af2a510e0",
-      "previousHash": "32c67f90b39feb4825a02da1e153ba50a36c6b2d29ac627a3ba40ef8fba96b5d",
-      "timestamp": 1647715187194
-    },
-    "transaction": {
-      "merkleRoot": "5c069be79984c945cc42c5c43cda7f6899d228bfb263654989d22ce17062fae1",
+      "merkleRoot": "bdcd5305a494afec4c1219a84472ee0727ed9ca6f3d25866c1e79f0898b5627d",
       "dataLst": [
         {
           "employeeId": "test test",
           "checkIn": "13:00",
-          "checkOut": "16:00",
+          "checkOut": "17:00",
           "shift": "Afternoon",
           "lateStatus": "OnTime",
           "date": "12-January-2022",
+          "workHours": 4,
+          "leaveStatus": false
+        },
+        {
+          "employeeId": "Howard Halim",
+          "checkIn": "12:00",
+          "checkOut": "20:00",
+          "shift": "Afternoon",
+          "lateStatus": "OnTime",
+          "date": "15-February-2022",
+          "workHours": 8,
+          "leaveStatus": false
+        }
+      ]
+    }
+  }
+] "date": "12-January-2022",
           "workHours": 3,
           "leaveStatus": false
         },
