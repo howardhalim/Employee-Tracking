@@ -1,0 +1,97 @@
+[
+  {
+    "header": {
+      "index": 0,
+      "currentHash": "cdf1501a3a4cc7f521447a5b47e3fbd0a67b28bf88cd24938695a7da0171e08b",
+      "previousHash": "0",
+      "timestamp": 1647714818779
+    }
+  },
+  {
+    "header": {
+      "index": 1,
+      "currentHash": "4ac279b729084372d80171c8632054289e0313714efe0de644d939863f93cc7e",
+      "previousHash": "cdf1501a3a4cc7f521447a5b47e3fbd0a67b28bf88cd24938695a7da0171e08b",
+      "timestamp": 1647714818840
+    },
+    "transaction": {
+      "merkleRoot": "f8bfa926553aebf80d5f60d76935cff6801e55ed8a8832c360f3d9d845386f76",
+      "dataLst": [
+        {
+          "employeeId": "5",
+          "gatewayId": "H123",
+          "detectedTime": "12:12",
+          "scanTime": "13:13",
+          "status": "Away",
+          "duration": 61
+        },
+        {
+          "employeeId": "5",
+          "gatewayId": "B12345",
+          "detectedTime": "13:13",
+          "scanTime": "13:44",
+          "status": "Away",
+          "duration": 31
+        },
+        {
+          "employeeId": "5",
+          "gatewayId": "H123",
+          "detectedTime": "13:45",
+          "scanTime": "14:23",
+          "status": "Away",
+          "duration": 82
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "index": 2,
+      "currentHash": "9b97644345d9c2f1e347a5efc4e34646bb03fe8687c446cc3e177b132dcdff04",
+      "previousHash": "4ac279b729084372d80171c8632054289e0313714efe0de644d939863f93cc7e",
+      "timestamp": 1647714834776
+    },
+    "transaction": {
+      "merkleRoot": "c5f9b645c3846374e484a5f223d3bb5fecbad687497ef3dea32f06aa844e0cdf",
+      "dataLst": [
+        {
+          "employeeId": "2",
+          "gatewayId": "B12345",
+          "detectedTime": "12:12",
+          "scanTime": "12:33",
+          "status": "Online",
+          "duration": 21
+        },
+        {
+          "employeeId": "3",
+          "gatewayId": "B12345",
+          "detectedTime": "12:33",
+          "scanTime": "13:21",
+          "status": "Away",
+          "duration": 72
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "index": 3,
+      "currentHash": "c32afbad0b1b4e5b164420f21ef43a8d937e27d625fc6cbd5f7b2c9aa9f707ba",
+      "previousHash": "9b97644345d9c2f1e347a5efc4e34646bb03fe8687c446cc3e177b132dcdff04",
+      "timestamp": 1647714849673
+    },
+    "transaction": {
+      "merkleRoot": "53767f715406f94824e059c59b8a1267463aba0f661502576e314e4cb40011a9",
+      "dataLst": [
+        {
+          "employeeId": "5",
+          "gatewayId": "B12345",
+          "detectedTime": "14:12",
+          "scanTime": "15:00",
+          "status": "Away",
+          "duration": 72
+        }
+      ]
+    }
+  }
+]

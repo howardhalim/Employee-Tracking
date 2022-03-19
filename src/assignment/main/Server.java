@@ -388,4 +388,43 @@ public class Server {
          }
          return null;
     }
+    public List<AttendanceClass> getAttendance(){
+       
+        List<AttBlock> allData = AttBlockchain.get();
+        List<AttendanceClass> attList = new ArrayList<>();
+        System.out.println(allData);
+
+        for(AttBlock s : allData){
+            int idx = s.getHeader().getIndex();
+            if(idx!=0){
+                AttTransaction temp = s.getTransaction();
+                System.out.println("QQ" + temp);
+                for(int i = 0 ;i< temp.getDataLst().size();i++){
+                    System.out.println(temp.getDataLst().get(i));
+                    attList.add(temp.getDataLst().get(i));
+                }
+            }
+        }
+        return attList;
+        
+    }
+    
+    public List<LocationClass> getLocation(){
+        List<LocBlock> allData = LocBlockchain.get();
+        List<LocationClass> loclist = new ArrayList<>();
+        System.out.println(allData);
+
+        for(LocBlock s : allData){
+            int idx = s.getHeader().getIndex();
+            if(idx!=0){
+                LocTransaction temp = s.getTransaction();
+                System.out.println("QQ" + temp);
+                for(int i = 0 ;i< temp.getDataLst().size();i++){
+                    System.out.println(temp.getDataLst().get(i));
+                    loclist.add(temp.getDataLst().get(i));
+                }
+            }
+        }
+        return loclist;
+    }
 }

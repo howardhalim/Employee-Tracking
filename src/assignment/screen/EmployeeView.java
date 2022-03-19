@@ -26,7 +26,9 @@ public class EmployeeView extends javax.swing.JFrame {
         initComponents();
     }
     public static EmployeeClass EmployeeSelected;
-
+    boolean srch;
+    
+    List<EmployeeClass> lemp;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,6 +174,29 @@ public class EmployeeView extends javax.swing.JFrame {
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
+        if(SearchField.getText().equals("")){
+            lemp = assignment.main.Main.EmployeeList;
+            String[] name = new String[lemp.size()];
+            for(int i = 0;i<lemp.size();i++){
+                name[i] = lemp.get(i).getName();
+            }
+            jList1.setListData(name);
+        }
+        else{
+            List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+            lemp = new ArrayList<>();
+            for(int i=0;i<emp.size();i++){
+                if(emp.get(i).getName().contains(SearchField.getText())){
+                    lemp.add(emp.get(i));
+                }
+            }
+            String[] name = new String[lemp.size()];
+            for(int i = 0;i<lemp.size();i++){
+                name[i] = lemp.get(i).getName();
+            }
+            jList1.setListData(name); 
+            srch = true;
+        }
     }//GEN-LAST:event_SearchActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -185,8 +210,11 @@ public class EmployeeView extends javax.swing.JFrame {
             ); 
         }
         else{
-            EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
-        
+            if(!srch) 
+                EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+            else{
+                EmployeeSelected = lemp.get(idx);
+            }
             new EmployeeEdit().setVisible(true);
             this.setVisible(false);
         }
@@ -203,7 +231,11 @@ public class EmployeeView extends javax.swing.JFrame {
             ); 
         }
         else{
-            EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+            if(!srch) 
+                EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+            else{
+                EmployeeSelected = lemp.get(idx);
+            }
         
             new EmployeeDetails().setVisible(true);
             this.setVisible(false);
@@ -224,7 +256,11 @@ public class EmployeeView extends javax.swing.JFrame {
         }
         else{
             Server x = new Server();
-            EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+            if(!srch) 
+                EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+            else{
+                EmployeeSelected = lemp.get(idx);
+            }
             x.deleteEmployee(EmployeeSelected);
             JOptionPane.showMessageDialog(this,
                         "Delete Employee Successfully!",

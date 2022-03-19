@@ -17,7 +17,7 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
     }
-
+    public static PerformanceView perf;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +69,11 @@ public class MainPage extends javax.swing.JFrame {
 
         Performance.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         Performance.setText("Performance");
+        Performance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PerformanceActionPerformed(evt);
+            }
+        });
 
         Payslip.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         Payslip.setText("Payslip");
@@ -197,6 +202,13 @@ public class MainPage extends javax.swing.JFrame {
         this.setVisible(false);
         new GatewayView().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void PerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PerformanceActionPerformed
+        // TODO add your handling code here:
+        perf = new PerformanceView();
+        perf.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_PerformanceActionPerformed
 
     /**
      * @param args the command line arguments

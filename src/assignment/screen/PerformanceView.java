@@ -5,13 +5,12 @@
  */
 package assignment.screen;
 
+import assignment.function.AttendanceClass;
 import assignment.function.EmployeeClass;
 import assignment.function.LocationClass;
-import assignment.loc.LocBlock;
-import assignment.loc.LocBlockchain;
 import assignment.main.Server;
-import static assignment.screen.EmployeeView.EmployeeSelected;
-import dataInput.Location;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,17 +19,22 @@ import javax.swing.JOptionPane;
  *
  * @author howard
  */
-public class LocationView extends javax.swing.JFrame {
+public class PerformanceView extends javax.swing.JFrame {
 
     /**
-     * Creates new form LocationView
+     * Creates new form PerformanceView
      */
-    public static EmployeeClass EmployeeSelected;
-    public LocationView() {
+    public PerformanceView() {
         initComponents();
     }
+    public static String totalWorkHours;
+    public static String totalAwayTime;
+    public static String totalOvertime;
+    public static String totalLate;
+    public static String totalLeave;
+    public static String EmpName;
     boolean srch;
-    
+    public static EmployeeClass EmployeeSelected;
     List<EmployeeClass> lemp;
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,30 +46,16 @@ public class LocationView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        back = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         SearchField = new javax.swing.JTextField();
         Search = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Elist = new javax.swing.JList<>();
-        jPanel4 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(173, 216, 230));
-
-        back.setBackground(new java.awt.Color(173, 216, 230));
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment/dataset/smallback.png"))); // NOI18N
-        back.setBorderPainted(false);
-        back.setContentAreaFilled(false);
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-
-        jPanel2.setBackground(new java.awt.Color(173, 216, 230));
 
         SearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,48 +81,20 @@ public class LocationView extends javax.swing.JFrame {
         }
         Elist.setListData(name);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Search))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(173, 216, 230));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 23, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
-        );
-
-        jButton3.setText("Select");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        back.setBackground(new java.awt.Color(173, 216, 230));
+        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment/dataset/smallback.png"))); // NOI18N
+        back.setBorderPainted(false);
+        back.setContentAreaFilled(false);
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                backActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Select");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -141,31 +103,33 @@ public class LocationView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(back)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Search))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(back))
         );
 
@@ -189,12 +153,6 @@ public class LocationView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        assignment.main.Main.main.setVisible(true);
-    }//GEN-LAST:event_backActionPerformed
 
     private void SearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFieldActionPerformed
         // TODO add your handling code here:
@@ -227,10 +185,12 @@ public class LocationView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SearchActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int idx = Elist.getSelectedIndex();
-        if(idx == -1){
+        
+        
+        if(idx==-1){
             JOptionPane.showMessageDialog(this,
                     "Data has not been selected!",
                     "ERROR",
@@ -238,18 +198,75 @@ public class LocationView extends javax.swing.JFrame {
             ); 
         }
         else{
+            Server x = new Server();
             if(!srch) 
                 EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
             else{
                 EmployeeSelected = lemp.get(idx);
             }
-            new EmployeeLocation().setVisible(true);
+            String id = String.valueOf(x.getEmployeeId(EmployeeSelected));
+            List<LocationClass> allloc = x.getLocation();
+            List<AttendanceClass> allatt = x.getAttendance();
+            
+            List<LocationClass> filloc = new ArrayList<>();
+            List<AttendanceClass> filatt = new ArrayList<>();
+            
+            for(int i = 0 ; i < allatt.size();i++){
+                if(allatt.get(i).getEmployeeId().equals(EmployeeSelected.getName())){
+                    filatt.add(allatt.get(i));
+                }
+            }
+            
+            for(int i = 0 ;i<allloc.size();i++){
+                if(allloc.get(i).getEmployeeId().equals(id)){
+                    filloc.add(allloc.get(i));
+                }
+            }
+            
+            
+            
+            EmpName = EmployeeSelected.getName();
+            int totalWH = 0;
+            int totalOT = 0;
+            int tlate = 0;
+            int tleave = 0;
+            for(int i = 0 ;i<filatt.size();i++){
+                totalWH = totalWH + filatt.get(i).getWorkHours();
+                if(filatt.get(i).getWorkHours() > 5){
+                    totalOT = totalOT + filatt.get(i).getWorkHours() - 5;
+                }
+                if(filatt.get(i).getLateStatus().equals("Late")){
+                    tlate+=1;
+                }
+                if(filatt.get(i).isLeaveStatus()){
+                    tleave+=1;
+                }
+            }
+            int totalAway = 0;
+            for(int i = 0 ;i<filloc.size();i++){
+                String status = filloc.get(i).getStatus();
+                if(status.equals("Away")){
+                    totalAway = totalAway + filloc.get(i).getDuration() - 30;
+                }
+            }
+            totalAway/=60;
+            totalWorkHours = String.valueOf(totalWH);
+            totalAwayTime = String.valueOf(totalAway);
+            totalOvertime = String.valueOf(totalOT);
+            totalLeave = String.valueOf(tleave);
+            totalLate = String.valueOf(tlate);
+            
             this.setVisible(false);
+            new PerformanceDetails().setVisible(true);
         }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-    
-    
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        assignment.main.Main.main.setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -267,20 +284,20 @@ public class LocationView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LocationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerformanceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LocationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerformanceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LocationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerformanceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LocationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerformanceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LocationView().setVisible(true);
+                new PerformanceView().setVisible(true);
             }
         });
     }
@@ -290,10 +307,8 @@ public class LocationView extends javax.swing.JFrame {
     private javax.swing.JButton Search;
     private javax.swing.JTextField SearchField;
     private javax.swing.JButton back;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

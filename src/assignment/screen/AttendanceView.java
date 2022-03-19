@@ -5,6 +5,21 @@
  */
 package assignment.screen;
 
+import assignment.att.AttBlock;
+import assignment.att.AttBlockchain;
+import assignment.att.AttTransaction;
+import assignment.function.AttendanceClass;
+import assignment.function.EmployeeClass;
+import assignment.function.LocationClass;
+import assignment.loc.LocBlock;
+import assignment.loc.LocBlockchain;
+import assignment.loc.LocTransaction;
+import assignment.main.Server;
+import static assignment.screen.EmployeeView.EmployeeSelected;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author howard
@@ -17,7 +32,12 @@ public class AttendanceView extends javax.swing.JFrame {
     public AttendanceView() {
         initComponents();
     }
-
+    public static EmployeeClass EmployeeSelected;
+    public static AttendanceClass SelectedAttendance;
+    public static List<AttendanceClass> attendanceList;
+    boolean srch;
+    
+    List<EmployeeClass> lemp;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,13 +72,14 @@ public class AttendanceView extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Howard Halim" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
+        List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+        String[] name = new String[emp.size()];
+        for(int i = 0;i<emp.size();i++){
+            name[i] = emp.get(i).getName();
+        }
+        jList1.setListData(name);
 
         Search.setBackground(new java.awt.Color(173, 216, 230));
         Search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment/dataset/search_1_3.png"))); // NOI18N
@@ -76,11 +97,6 @@ public class AttendanceView extends javax.swing.JFrame {
             }
         });
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "19/03/2022" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jList2);
 
@@ -100,14 +116,12 @@ public class AttendanceView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(SearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -168,19 +182,111 @@ public class AttendanceView extends javax.swing.JFrame {
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
+        if(SearchField.getText().equals("")){
+            lemp = assignment.main.Main.EmployeeList;
+            String[] name = new String[lemp.size()];
+            for(int i = 0;i<lemp.size();i++){
+                name[i] = lemp.get(i).getName();
+            }
+            jList1.setListData(name);
+        }
+        else{
+            List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+            lemp = new ArrayList<>();
+            for(int i=0;i<emp.size();i++){
+                if(emp.get(i).getName().contains(SearchField.getText())){
+                    lemp.add(emp.get(i));
+                }
+            }
+            String[] name = new String[lemp.size()];
+            for(int i = 0;i<lemp.size();i++){
+                name[i] = lemp.get(i).getName();
+            }
+            jList1.setListData(name); 
+            srch = true;
+        }
     }//GEN-LAST:event_SearchActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int idx = jList1.getSelectedIndex();
+        if(idx==-1){
+            JOptionPane.showMessageDialog(this,
+                    "Data has not been selected!",
+                    "ERROR",
+                    JOptionPane.ERROR_MESSAGE
+            ); 
+        }else{
+            if(!srch) 
+                EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+            else{
+                EmployeeSelected = lemp.get(idx);
+            }
+            List<AttendanceClass> lst = getAttendanceData();
+            attendanceList = lst;
+            System.out.println(attendanceList);
+            String[] date = new String[lst.size()];
+            for(int i = 0;i<lst.size();i++){
+                date[i] = lst.get(i).getDate();
+            }
+            jList2.setListData(date);
+            
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        AttendanceDetails details = new AttendanceDetails();
-        details.setVisible(true);
-        this.setVisible(false);
+        int idx = jList2.getSelectedIndex();
+         if(idx==-1){
+            JOptionPane.showMessageDialog(this,
+                    "Data has not been selected!",
+                    "ERROR",
+                    JOptionPane.ERROR_MESSAGE
+            ); 
+        }else{
+            SelectedAttendance = attendanceList.get(idx);
+            AttendanceDetails details = new AttendanceDetails();
+            details.setVisible(true);
+            this.setVisible(false);
+        }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    private List<AttendanceClass> getAttendanceData(){
+        //System.out.println(LocBlockchain.get());
+        List<AttBlock> allData = AttBlockchain.get();
+        EmployeeClass EmployeeSelected = AttendanceView.EmployeeSelected;
+        List<AttendanceClass> attlist = new ArrayList<>();
+        String id = EmployeeSelected.getName();
+        System.out.println(id);
+//        System.out.println(allData);
+        for(AttBlock s : allData){
+           
+            int idx = s.getHeader().getIndex();
+            if(idx!=0){
+                AttTransaction temp = s.getTransaction();
+                System.out.println("QQ" + temp);
+                for(int i = 0 ;i< temp.getDataLst().size();i++){
+                    String idS = temp.getDataLst().get(i).getEmployeeId();
+                    if(id.equals(idS)){
+                        System.out.println(temp.getDataLst().get(i).getDate());
+                        attlist.add(temp.getDataLst().get(i));
+                        
+                    }
+                }
+                
+                
+            }
+            
+        }
+        System.out.println(attlist);
+        return attlist;
+        //List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+        //String[] name = new String[emp.size()];
+        //for(int i = 0;i<emp.size();i++){
+        //    name[i] = emp.get(i).getName();
+        //}
+        //jList1.setListData(name);
+    }
     /**
      * @param args the command line arguments
      */

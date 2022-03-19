@@ -9,6 +9,7 @@ import assignment.att.AttBlockchain;
 import assignment.function.AttendanceClass;
 import assignment.function.EmployeeClass;
 import assignment.loc.LocBlockchain;
+
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,7 +28,10 @@ public class Attendance extends javax.swing.JFrame {
     public Attendance() {
         initComponents();
     }
-
+    public static EmployeeClass EmployeeSelected;
+    boolean srch;
+    
+    List<EmployeeClass> lemp;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -463,19 +467,42 @@ public class Attendance extends javax.swing.JFrame {
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
+        if(SearchField.getText().equals("")){
+            lemp = assignment.main.Main.EmployeeList;
+            String[] name = new String[lemp.size()];
+            for(int i = 0;i<lemp.size();i++){
+                name[i] = lemp.get(i).getName();
+            }
+            empList.setListData(name);
+        }
+        else{
+            List<EmployeeClass> emp = assignment.main.Main.EmployeeList;
+            lemp = new ArrayList<>();
+            for(int i=0;i<emp.size();i++){
+                if(emp.get(i).getName().contains(SearchField.getText())){
+                    lemp.add(emp.get(i));
+                }
+            }
+            String[] name = new String[lemp.size()];
+            for(int i = 0;i<lemp.size();i++){
+                name[i] = lemp.get(i).getName();
+            }
+            empList.setListData(name); 
+            srch = true;
+        }
     }//GEN-LAST:event_SearchActionPerformed
 
     private void attSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attSubmitActionPerformed
         try{
             boolean validTime = false;
-            boolean validShift = false;
+            boolean validShift = true;
             boolean validYear = true;
             boolean passed = false;
             String checkIn = "-";
             String checkOut = "-";
-            String lateStatus = "-";
+            String lateStatus = "OnTime";
             String shift = "-";
-            String workHours = "-";
+            int workHours = 0;
             String date;
             // Get Form data
             String employee = selectedEmployee.getText();
@@ -484,7 +511,7 @@ public class Attendance extends javax.swing.JFrame {
             int dateY = parseInt(attYear.getText());
             date = dateD+"-"+dateM+"-"+dateY;
             boolean leaveStatus = onLeave.isSelected();
-            
+            System.out.println(leaveStatus);
             if(!leaveStatus){
                 // Check in - Check out
                 int inH = parseInt(inHour.getText());
@@ -510,24 +537,35 @@ public class Attendance extends javax.swing.JFrame {
                 // Late status (Morning: 7-12, Afternoon 13-18)
                 if((shift == "Morning" && inH >= 7 && inM > 00) || (shift == "Afternoon" && inH >= 13 && inM > 00)){
                     lateStatus = "Late";
-                } else if ((shift == "Morning" && (inH > 12) || inH < 7)){
-                    validShift = false;
-                } else if ((shift == "Afternoon" && (inH > 18) || inH < 13)){
-                    validShift = false;
-                } else {
-                    lateStatus = "On Time";
                     validShift = true;
                 }
-
+                if ((shift == "Morning" && inH > 12)){
+                    validShift = false;
+                }
+                if ((shift == "Afternoon" && (inH > 18))){
+                    validShift = false;
+                } 
+                System.out.println(validShift + " " + validTime);
                 // workHours
+                
                 int workH = outH - inH;
-                int workM = outM - inM;
-                workHours = String.format("%02d", workH) + " Hours " + String.format("%02d", workM) + " Mins";
+                workHours = parseInt(String.format("%02d", workH));
                 if (validTime && validShift){
                     passed = true;
                 }
+                if(!validShift){
+                    JOptionPane.showMessageDialog(this, "Invalid Shift Hours!");
+                }
             }
-
+            else if(leaveStatus){
+                lateStatus = "-";
+            }
+            if(employee.equals("")){
+                passed=false;
+                leaveStatus = false;
+                
+            }
+            System.out.println(passed);
             if(passed || leaveStatus){
                 AttendanceClass att = new AttendanceClass(employee, checkIn, checkOut, shift, lateStatus, date, workHours, leaveStatus);
                 attList.add(att);
@@ -557,6 +595,13 @@ public class Attendance extends javax.swing.JFrame {
                     new Attendance().setVisible(true);
                 }
             }
+            else{
+                JOptionPane.showMessageDialog(this,
+                    "Data has not been selected!",
+                    "ERROR",
+                    JOptionPane.ERROR_MESSAGE
+                ); 
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, "Please input correctly!");
         }
@@ -564,12 +609,29 @@ public class Attendance extends javax.swing.JFrame {
 
     private void selectEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEmpActionPerformed
         try{
-            String listVal = empList.getSelectedValue();
-            if(listVal == null){
-                JOptionPane.showMessageDialog(this, "Please choose an employee!");
-            } else{
-                selectedEmployee.setText(listVal);
+            int idx = empList.getSelectedIndex();
+        
+        
+            if(idx==-1){
+                JOptionPane.showMessageDialog(this,
+                        "Data has not been selected!",
+                        "ERROR",
+                        JOptionPane.ERROR_MESSAGE
+                ); 
             }
+            else{
+                if(!srch) 
+                    EmployeeSelected = assignment.main.Main.EmployeeList.get(idx);
+                 else{
+                    EmployeeSelected = lemp.get(idx);
+                }
+                if(EmployeeSelected == null){
+                    JOptionPane.showMessageDialog(this, "Please choose an employee!");
+                } else{
+                    selectedEmployee.setText(EmployeeSelected.getName());
+                }
+            }
+            
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, "Oops! There is something wrong.");
         }
