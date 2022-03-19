@@ -5,6 +5,7 @@
  */
 package assignment.screen;
 
+import assignment.function.GatewayClass;
 import assignment.main.Server;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -18,7 +19,7 @@ public class GatewayView extends javax.swing.JFrame {
     /**
      * Creates new form GatewayView
      */
-    public static String GatewaySelected;
+    public static GatewayClass GatewaySelected;
     public GatewayView() {
         initComponents();
     }
@@ -47,10 +48,10 @@ public class GatewayView extends javax.swing.JFrame {
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
-        List<String> gate = assignment.main.Main.GatewayList;
+        List<GatewayClass> gate = assignment.main.Main.GatewayList;
         String[] loc = new String[gate.size()];
         for(int i = 0;i<gate.size();i++){
-            loc[i] = gate.get(i);
+            loc[i] = gate.get(i).getLocation();
         }
         jList1.setListData(loc);
 
@@ -175,6 +176,7 @@ public class GatewayView extends javax.swing.JFrame {
         }
         else{
             GatewaySelected = assignment.main.Main.GatewayList.get(idx);
+            System.out.println(GatewaySelected.getGateway_id());
             new GatewayDetails().setVisible(true);
             this.setVisible(false);
         }
@@ -195,7 +197,7 @@ public class GatewayView extends javax.swing.JFrame {
         else{
             Server x = new Server();
             GatewaySelected = assignment.main.Main.GatewayList.get(idx);
-            x.deleleGateway(GatewaySelected);
+            x.deleleGateway(GatewaySelected.getGateway_id());
             JOptionPane.showMessageDialog(this,
                         "Delete Gateway Successfully!",
                         "DELETE SUCCESS",

@@ -114,7 +114,7 @@
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="List&lt;String&gt; gate = assignment.main.Main.GatewayList;&#xa;String[] loc = new String[gate.size()];&#xa;for(int i = 0;i&lt;gate.size();i++){&#xa;    loc[i] = gate.get(i);&#xa;}&#xa;jList1.setListData(loc);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="List&lt;GatewayClass&gt; gate = assignment.main.Main.GatewayList;&#xa;String[] loc = new String[gate.size()];&#xa;for(int i = 0;i&lt;gate.size();i++){&#xa;    loc[i] = gate.get(i).getLocation();&#xa;}&#xa;jList1.setListData(loc);"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>

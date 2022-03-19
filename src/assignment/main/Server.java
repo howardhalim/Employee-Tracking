@@ -7,6 +7,7 @@ package assignment.main;
 
 import assignment.ds.MySignature;
 import assignment.function.EmployeeClass;
+import assignment.function.GatewayClass;
 import assignment.function.LocationClass;
 import assignment.loc.LocBlock;
 import assignment.loc.LocBlockchain;
@@ -206,7 +207,7 @@ public class Server {
          return res;
     }
     
-    public boolean checkGateway (String location){
+    public boolean checkGateway (String gatewayid){
         
         String sql = "SELECT * FROM Gateway";
         try (Connection conn = this.connect();
@@ -214,8 +215,8 @@ public class Server {
              ResultSet rs    = stmt.executeQuery(sql)){
          
              while(rs.next()){
-                 String loc = rs.getString("location");
-                 if(loc.equals(location)){
+                 String loc = rs.getString("gateway_id");
+                 if(loc.equals(gatewayid)){
                      return false;
                  }
              }
@@ -226,12 +227,13 @@ public class Server {
         return true;
     }
     
-    public void addGateway(String location){
-        String sql = "INSERT INTO Gateway(location) VALUES(?)";
+    public void addGateway(String gateway_id, String location){
+        String sql = "INSERT INTO Gateway(gateway_id, location) VALUES(?,?)";
         try (Connection conn = this.connect();
                PreparedStatement ps = conn.prepareStatement(sql)) {
               
-               ps.setString(1,location);
+               ps.setString(1,gateway_id);
+               ps.setString(2,location);
                
                ps.executeUpdate();
                
@@ -239,16 +241,18 @@ public class Server {
               System.out.println(e.getMessage());
         }
     }
-    public List<String> getGateway(){
+    public List<GatewayClass> getGateway(){
         String sql = "SELECT * FROM Gateway";
-         List<String> res  = new ArrayList<>();
+         List<GatewayClass> res  = new ArrayList<>();
          try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
          
              while(rs.next()){
+                 String id = rs.getString("gateway_id");
                  String temp = rs.getString("location");
-                 res.add(temp);
+                 GatewayClass te = new GatewayClass(id,temp);
+                 res.add(te);
              }
          }catch (Exception e){
              
@@ -256,11 +260,11 @@ public class Server {
          return res;
     }
     
-    public void deleleGateway(String location){
-        String sql = "DELETE FROM Gateway WHERE location = ?";
+    public void deleleGateway(String gateway_id){
+        String sql = "DELETE FROM Gateway WHERE gateway_id = ?";
          try (Connection conn = this.connect();
                 PreparedStatement ps = conn.prepareStatement(sql)){
-               ps.setString(1, location);
+               ps.setString(1, gateway_id);
                ps.executeUpdate();
                
         } catch (SQLException e){
@@ -319,5 +323,39 @@ public class Server {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public String getGatewayId(String GatewaySelected) {
+        String sql = "SELECT * FROM Gateway";
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 if(rs.getString("gateway_id").equals(GatewaySelected)){
+                     return rs.getString("gateway_id");
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+         return null;
+    }
+
+    public String getGatewayName(String gatewayId) {
+        String sql = "SELECT * FROM Gateway";
+         try (Connection conn = this.connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+         
+             while(rs.next()){
+                 if(rs.getString("gateway_id").equals(gatewayId)){
+                     return rs.getString("location");
+                 }
+             }
+         }catch (Exception e){
+             
+         }
+         return null;
     }
 }

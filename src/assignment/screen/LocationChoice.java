@@ -17,7 +17,7 @@ public class LocationChoice extends javax.swing.JFrame {
     public LocationChoice() {
         initComponents();
     }
-
+    public static LocationView loc;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,7 +92,7 @@ public class LocationChoice extends javax.swing.JFrame {
 
     private void ViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewActionPerformed
         // TODO add your handling code here:
-        LocationView loc = new LocationView();
+        loc = new LocationView();
         loc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ViewActionPerformed

@@ -7,6 +7,7 @@ package assignment.main;
 
 import assignment.ds.MySignature;
 import assignment.function.EmployeeClass;
+import assignment.function.GatewayClass;
 import assignment.function.LocationClass;
 import assignment.loc.LocBlock;
 import assignment.loc.LocBlockchain;
@@ -29,7 +30,7 @@ import org.apache.commons.codec.binary.Base64;
 public class Main {
    public static MainPage main = new MainPage();
    public static List<EmployeeClass> EmployeeList;
-   public static List<String> GatewayList;
+   public static List<GatewayClass> GatewayList;
     public static void main(String[] args) throws Exception {
         Server x = new Server();
         EmployeeList = x.getEmployee();
@@ -38,20 +39,20 @@ public class Main {
         assignment.screen.LoginPage res = new assignment.screen.LoginPage();
         res.setVisible(true);
         
-        System.out.println(LocBlockchain.get());
-        
-        System.out.println("gg\n" + LocBlockchain.get());
-        LinkedList<LocBlock> allData = LocBlockchain.get();
-        for(LocBlock s : allData){
-            System.out.println("s\n"+ s);
-            LocTransaction g = s.getTransaction();
-            System.out.println("g\n"+ g);
-            if(g!=null){
-                ArrayList<LocationClass> ss = g.getDataLst();
-                System.out.println("ss\n"+ ss);
-            }
-
-        }
+//        System.out.println(LocBlockchain.get());
+//        
+//        System.out.println("gg\n" + LocBlockchain.get());
+//        LinkedList<LocBlock> allData = LocBlockchain.get();
+//        for(LocBlock s : allData){
+//            System.out.println("s\n"+ s);
+//            LocTransaction g = s.getTransaction();
+//            System.out.println("g\n"+ g);
+//            if(g!=null){
+//                ArrayList<LocationClass> ss = g.getDataLst();
+//                System.out.println("ss\n"+ ss);
+//            }
+//
+//        }
 
 //        MySignature mysig = new MySignature();
 //        byte[] publicBytes = Base64.decodeBase64("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCR5hlWzDSvNzsW6xKl3trTbczPNekq2Bx4CeOSjxh++HqMPnd14bwBWWiIQ5VkURyn+x60BxGp6WpHjN/0aiPLqZV1OfB2GOrUUTbbtXe8av7mUOZjLj39kNw01kpB7tQSutuJKgOhfogCQt++75rFHTFEH4L1+cv8RcRpAFYmlwIDAQAB");

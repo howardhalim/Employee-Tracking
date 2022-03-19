@@ -2,25 +2,68 @@
   {
     "header": {
       "index": 0,
-      "currentHash": "43d3645be816a6efa0b1f6b50e2cd2cf1228159a7b08a1db6fa2215caec0686d",
+      "currentHash": "59aee0b121d87e08a6f07e28a02734cc0dea2ab5c5be1cddea129563ba8f4721",
       "previousHash": "0",
-      "timestamp": 1647689575877
+      "timestamp": 1647697675703
     }
   },
   {
     "header": {
       "index": 1,
-      "currentHash": "76791c0b94ad65624754c7939f068667803d9b52d24dbe29d5aa8bac1ec49aa8",
-      "previousHash": "43d3645be816a6efa0b1f6b50e2cd2cf1228159a7b08a1db6fa2215caec0686d",
-      "timestamp": 1647689575939
+      "currentHash": "6b2feb2852a4ec9fc2488125434bae45b2a4f4b8b858e6eefeb3cad54de04122",
+      "previousHash": "59aee0b121d87e08a6f07e28a02734cc0dea2ab5c5be1cddea129563ba8f4721",
+      "timestamp": 1647697675770
     },
     "transaction": {
-      "SIZE": 10,
-      "merkleRoot": "9b1da28c32fb27d160ec5ce1ce4810ec8ff5110ff3e48ec73006df07be442446",
+      "merkleRoot": "e45aa930bb5d8c771c7fe2ce93f80ce27849043ea1a4c90f9b7ef2fbd4aca5b6",
       "dataLst": [
         {
-          "employeeId": "a",
-          "gatewayId": "a",
+          "employeeId": "5",
+          "gatewayId": "B12345",
+          "detectedTime": "01:02",
+          "scanTime": "03:04"
+        },
+        {
+          "employeeId": "5",
+          "gatewayId": "B12345",
+          "detectedTime": "02:03",
+          "scanTime": "04:05"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "index": 2,
+      "currentHash": "aee5c36ed65aea316de450814210a3ccff675aa44c583f1f9b2f75b03ecb2480",
+      "previousHash": "6b2feb2852a4ec9fc2488125434bae45b2a4f4b8b858e6eefeb3cad54de04122",
+      "timestamp": 1647697926686
+    },
+    "transaction": {
+      "merkleRoot": "f28893a35ce1d13cfb535868509317cdb1fc9c7b633142d5a7f9f8520a4fdfb0",
+      "dataLst": [
+        {
+          "employeeId": "5",
+          "gatewayId": "H123",
+          "detectedTime": "04:05",
+          "scanTime": "06:07"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "index": 3,
+      "currentHash": "ddda108ea4639e552732b51b038a20ef5ac991ff834860e3018bef94e6fed87e",
+      "previousHash": "aee5c36ed65aea316de450814210a3ccff675aa44c583f1f9b2f75b03ecb2480",
+      "timestamp": 1647699091563
+    },
+    "transaction": {
+      "merkleRoot": "22930393f4f9b157e4073eee21b6188650017e2cae9d9fb71a024f795e9fea35",
+      "dataLst": [
+        {
+          "employeeId": "2",
+          "gatewayId": "B12345",
           "detectedTime": "01:02",
           "scanTime": "03:04"
         }
@@ -29,18 +72,17 @@
   },
   {
     "header": {
-      "index": 2,
-      "currentHash": "fa07a18cfb9d6185f5ffc54c08c774a6f410c16736cc75e82f947efd87333cfc",
-      "previousHash": "76791c0b94ad65624754c7939f068667803d9b52d24dbe29d5aa8bac1ec49aa8",
-      "timestamp": 1647689996747
+      "index": 4,
+      "currentHash": "05d8917a7870b5035fd169177b288eece091ce64cf2db5c14cab053c98ff64f8",
+      "previousHash": "ddda108ea4639e552732b51b038a20ef5ac991ff834860e3018bef94e6fed87e",
+      "timestamp": 1647699714444
     },
     "transaction": {
-      "SIZE": 10,
-      "merkleRoot": "1dd44972946a5f334a1ca671a570c65ce1b7905055f7c333824a5dfec5368450",
+      "merkleRoot": "c92d573f12c56d0a5ea67221f57e8e06a39e2474493e52d2101169fdf911bc52",
       "dataLst": [
         {
-          "employeeId": "aaa",
-          "gatewayId": "avvv",
+          "employeeId": "3",
+          "gatewayId": "B12345",
           "detectedTime": "01:02",
           "scanTime": "03:04"
         }
