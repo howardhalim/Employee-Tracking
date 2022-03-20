@@ -354,7 +354,6 @@ public class Server {
     }
     
     public void editEmployee(String name , String ic_passport , double rate , int id, String beacon){
-        System.out.println(beacon);
          String sql = "UPDATE Employee SET name = ? , "
                 + "ic_passport = ?, "
                 + "hourly_rate = ?, "
