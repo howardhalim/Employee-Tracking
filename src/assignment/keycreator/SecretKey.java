@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecretKey {
 	private static final String ALGORITHM = "AES";
 	
-	private final static String SECRET_CHARS = "thisis@symmetr!ccrypt0system";
+	private final static String SECRET_CHARS = "BcDaSsIgNmEnTiStHeBeSt";
 	
 	public static Key create() {
 		

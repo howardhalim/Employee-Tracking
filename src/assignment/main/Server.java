@@ -8,16 +8,20 @@ package assignment.main;
 import assignment.att.AttBlock;
 import assignment.att.AttBlockchain;
 import assignment.att.AttTransaction;
+import assignment.crypto.Crypto;
+import assignment.crypto.Symmetric;
 import assignment.ds.MySignature;
 import assignment.function.AttendanceClass;
 import assignment.function.EmployeeClass;
 import assignment.function.GatewayClass;
 import assignment.function.LocationClass;
+import assignment.keycreator.SecretKey;
 import assignment.loc.LocBlock;
 import assignment.loc.LocBlockchain;
 import assignment.loc.LocTransaction;
 import assignment.screen.AttendanceView;
 import java.io.File;
+import java.security.Key;
 import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
@@ -39,6 +43,8 @@ import org.apache.commons.codec.binary.Base64;
 public class Server {
     // Connect SQLite Database
     static String projectPath = System.getProperty("user.dir");
+    static Key myKey = SecretKey.create();
+     static  Crypto crypto = new Symmetric("AES");
     public static Connection connect(){
         Connection con = null;
         try
@@ -135,15 +141,16 @@ public class Server {
         return false;
     }
     
-    public boolean checkUsername(String username){
+    public boolean checkUsername(String username) throws Exception{
         String sql = "SELECT * FROM Admin";
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
-
+            
             // loop through the result set
             while (rs.next()) {
                 String user = rs.getString("username");
+                String user_decrypt = crypto.decrypt(user, myKey);
                 if(user.equals(username)){
                     return false;
                 }
@@ -155,14 +162,16 @@ public class Server {
         
     }
     
-    public void registerAccount(String sign, String username){
+    public void registerAccount(String sign, String username) throws Exception{
         String sql = "INSERT INTO Admin(signature, username) VALUES(?,?)";
           
          try (Connection conn = this.connect();
                PreparedStatement ps = conn.prepareStatement(sql)) {
-              
+               
+               String username_encrypted = crypto.encrypt(username,myKey);
+               System.out.println(username_encrypted);
                ps.setString(1,sign);
-               ps.setString(2,username);
+               ps.setString(2,username_encrypted);
                ps.executeUpdate();
              
           } catch (SQLException e) {
@@ -210,7 +219,7 @@ public class Server {
          String sql = "INSERT INTO Employee(name,hourly_rate,ic_passport,beacon_id) VALUES(?,?,?,?)";
          try (Connection conn = this.connect();
                PreparedStatement ps = conn.prepareStatement(sql)) {
-              
+               
                ps.setString(1,name);
                ps.setDouble(2,rate);
                ps.setString(3,ic_passport);

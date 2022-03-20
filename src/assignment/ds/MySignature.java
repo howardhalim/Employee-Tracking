@@ -42,23 +42,9 @@ public class MySignature {
 		signr.update(data.getBytes());
 		return Base64.getEncoder().encodeToString(signr.sign());
 	}
-//        public String sign(String data, PrivateKey priv) throws Exception{
-//            signr.initSign(priv);
-//            signr.update(data.getBytes());
-//            return Base64.getEncoder().encodeToString(signr.sign());
-//            
-//        }
-	
-	/*
-	 * verify()
-	 */
-	
-//	public boolean verify(String data, String signature) throws Exception{
-//		signr.initVerify(keyPair.getPublic());
-//		
-//		signr.update(data.getBytes());
-//		return signr.verify(Base64.getDecoder().decode(signature));
-//	}
+        /*
+         * verify()
+         */
         public boolean verify(String data, String signature, PublicKey pub) throws Exception{
 		signr.initVerify(pub);
 		signr.update(data.getBytes());
