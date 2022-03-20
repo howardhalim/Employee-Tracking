@@ -2,44 +2,52 @@
   {
     "header": {
       "index": 0,
-      "currentHash": "cdf1501a3a4cc7f521447a5b47e3fbd0a67b28bf88cd24938695a7da0171e08b",
+      "currentHash": "7f22b9e6a524dc0347f4067d460b4521cc595bc9962f6f91356293d1beb7ebc6",
       "previousHash": "0",
-      "timestamp": 1647714818779
+      "timestamp": 1647719161831
     }
   },
   {
     "header": {
       "index": 1,
-      "currentHash": "4ac279b729084372d80171c8632054289e0313714efe0de644d939863f93cc7e",
-      "previousHash": "cdf1501a3a4cc7f521447a5b47e3fbd0a67b28bf88cd24938695a7da0171e08b",
-      "timestamp": 1647714818840
+      "currentHash": "4d44723056c65731e7ac8b311c151f7f2fbc4418c7bc500be292c5b8497f8b1f",
+      "previousHash": "7f22b9e6a524dc0347f4067d460b4521cc595bc9962f6f91356293d1beb7ebc6",
+      "timestamp": 1647719161837
     },
     "transaction": {
-      "merkleRoot": "f8bfa926553aebf80d5f60d76935cff6801e55ed8a8832c360f3d9d845386f76",
+      "merkleRoot": "d845b580296f22f107f758a263758fa1e0bdcbd5dcdba67d799c03dae01c5352",
       "dataLst": [
         {
           "employeeId": "5",
-          "gatewayId": "H123",
-          "detectedTime": "12:12",
-          "scanTime": "13:13",
+          "gatewayId": "B12345",
+          "detectedTime": "11:11",
+          "scanTime": "12:00",
           "status": "Away",
-          "duration": 61
+          "duration": 71
         },
         {
           "employeeId": "5",
           "gatewayId": "B12345",
-          "detectedTime": "13:13",
-          "scanTime": "13:44",
-          "status": "Away",
-          "duration": 31
+          "detectedTime": "12:00",
+          "scanTime": "12:25",
+          "status": "Online",
+          "duration": 25
         },
         {
           "employeeId": "5",
-          "gatewayId": "H123",
-          "detectedTime": "13:45",
-          "scanTime": "14:23",
+          "gatewayId": "B12345",
+          "detectedTime": "12:30",
+          "scanTime": "13:00",
           "status": "Away",
-          "duration": 82
+          "duration": 90
+        },
+        {
+          "employeeId": "3",
+          "gatewayId": "H123",
+          "detectedTime": "13:00",
+          "scanTime": "14:00",
+          "status": "Away",
+          "duration": 60
         }
       ]
     }
@@ -47,37 +55,33 @@
   {
     "header": {
       "index": 2,
-      "currentHash": "9b97644345d9c2f1e347a5efc4e34646bb03fe8687c446cc3e177b132dcdff04",
-      "previousHash": "4ac279b729084372d80171c8632054289e0313714efe0de644d939863f93cc7e",
-      "timestamp": 1647714834776
+      "currentHash": "0ae918b8bf914cfd0972c2d0caa5be930cf37b21fbb2f2196cd9ba9d742887f3",
+      "previousHash": "4d44723056c65731e7ac8b311c151f7f2fbc4418c7bc500be292c5b8497f8b1f",
+      "timestamp": 1647719174331
     },
     "transaction": {
-      "merkleRoot": "c5f9b645c3846374e484a5f223d3bb5fecbad687497ef3dea32f06aa844e0cdf",
+      "merkleRoot": "94d35cc5aced17f35bf211100fa354af83889e4d937835cfdac36ef49d4a1b27",
       "dataLst": [
         {
           "employeeId": "2",
           "gatewayId": "B12345",
-          "detectedTime": "12:12",
-          "scanTime": "12:33",
-          "status": "Online",
-          "duration": 21
+          "detectedTime": "12:00",
+          "scanTime": "14:00",
+          "status": "Away",
+          "duration": 120
         },
         {
-          "employeeId": "3",
-          "gatewayId": "B12345",
-          "detectedTime": "12:33",
-          "scanTime": "13:21",
+          "employeeId": "5",
+          "gatewayId": "H123",
+          "detectedTime": "14:00",
+          "scanTime": "14:40",
           "status": "Away",
-          "duration": 72
+          "duration": 40
         }
       ]
     }
-  },
-  {
-    "header": {
-      "index": 3,
-      "currentHash": "c32afbad0b1b4e5b164420f21ef43a8d937e27d625fc6cbd5f7b2c9aa9f707ba",
-      "previousHash": "9b97644345d9c2f1e347a5efc4e34646bb03fe8687c446cc3e177b132dcdff04",
+  }
+]b132dcdff04",
       "timestamp": 1647714849673
     },
     "transaction": {
