@@ -9,6 +9,7 @@ import assignment.function.EmployeeClass;
 import assignment.main.Server;
 import dataInput.Employee;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -44,6 +45,8 @@ public class EmployeeEdit extends javax.swing.JFrame {
         name = new javax.swing.JTextField();
         ic_passport = new javax.swing.JTextField();
         rate = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        beaconId = new javax.swing.JTextField();
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,6 +69,14 @@ public class EmployeeEdit extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Beacon ID");
+
+        beaconId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beaconIdActionPerformed(evt);
             }
         });
 
@@ -93,7 +104,11 @@ public class EmployeeEdit extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(beaconId, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jButton1)))
@@ -116,13 +131,18 @@ public class EmployeeEdit extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beaconId, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
 
         name.setText(emp.getName());
         ic_passport.setText(emp.getIc_passport());
         rate.setText(String.valueOf(emp.getHourly_rate()));
+        beaconId.setText(emp.getBeacon());
 
         back.setBackground(new java.awt.Color(173, 216, 230));
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignment/dataset/smallback.png"))); // NOI18N
@@ -168,8 +188,8 @@ public class EmployeeEdit extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -182,8 +202,9 @@ public class EmployeeEdit extends javax.swing.JFrame {
         String nm = name.getText();
         String icpass = ic_passport.getText();
         String rates = rate.getText();
+        String beacon = beaconId.getText();
         
-        if(nm.equals("") || icpass.equals("") || rates.equals("") ){
+        if(nm.equals("") || icpass.equals("") || rates.equals("") || beacon.equals("") ){
             JOptionPane.showMessageDialog(this,
                     "Fill in All Details!",
                     "Submit Fail",
@@ -199,7 +220,7 @@ public class EmployeeEdit extends javax.swing.JFrame {
                 double rate = Math.round(hourly_rate * 100.0) / 100.0;
                 int id = x.getEmployeeId(emp);
                 System.out.println(id);
-                x.editEmployee(nm,icpass,rate,id);
+                x.editEmployee(nm,icpass,rate,id,beacon);
                 JOptionPane.showMessageDialog(this,
                     "Data Updatted Successfully!",
                     "Success",
@@ -230,10 +251,14 @@ public class EmployeeEdit extends javax.swing.JFrame {
         assignment.main.Main.main.setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
+    private void beaconIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beaconIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_beaconIdActionPerformed
+
     /**
-     * @param args the command line arguments
+     * @param args the command line argumentsthrows UnsupportedLookAndFeelException 
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws UnsupportedLookAndFeelException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -252,8 +277,8 @@ public class EmployeeEdit extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EmployeeEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(EmployeeEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmployeeEdit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            
         }
         //</editor-fold>
         //</editor-fold>
@@ -268,12 +293,14 @@ public class EmployeeEdit extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JTextField beaconId;
     private javax.swing.JTextField ic_passport;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField name;

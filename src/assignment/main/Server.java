@@ -206,14 +206,15 @@ public class Server {
         return false;
     }
     
-    public void addEmployee(String name , String ic_passport , double rate){
-         String sql = "INSERT INTO Employee(name,hourly_rate,ic_passport) VALUES(?,?,?)";
+    public void addEmployee(String name , String ic_passport , double rate, String beacon){
+         String sql = "INSERT INTO Employee(name,hourly_rate,ic_passport,beacon_id) VALUES(?,?,?,?)";
          try (Connection conn = this.connect();
                PreparedStatement ps = conn.prepareStatement(sql)) {
               
                ps.setString(1,name);
                ps.setDouble(2,rate);
                ps.setString(3,ic_passport);
+               ps.setString(4,beacon);
                ps.executeUpdate();
                
           } catch (SQLException e) {
@@ -229,7 +230,7 @@ public class Server {
              ResultSet rs    = stmt.executeQuery(sql)){
          
              while(rs.next()){
-                 EmployeeClass temp = new EmployeeClass(rs.getString("name"), rs.getString("ic_passport"), rs.getDouble("hourly_rate"));
+                 EmployeeClass temp = new EmployeeClass(rs.getString("name"), rs.getString("ic_passport"), rs.getDouble("hourly_rate"), rs.getString("beacon_id"));
                  res.add(temp);
              }
          }catch (Exception e){
@@ -352,10 +353,12 @@ public class Server {
          return -1;
     }
     
-    public void editEmployee(String name , String ic_passport , double rate , int id){
+    public void editEmployee(String name , String ic_passport , double rate , int id, String beacon){
+        System.out.println(beacon);
          String sql = "UPDATE Employee SET name = ? , "
                 + "ic_passport = ?, "
-                + "hourly_rate = ? "
+                + "hourly_rate = ?, "
+                + "beacon_id = ? "
                 + "WHERE employee_id = ?";
 
         try (Connection conn = this.connect();
@@ -365,9 +368,9 @@ public class Server {
             pstmt.setString(1, name);
             pstmt.setString(2, ic_passport);
             pstmt.setDouble(3, rate);
+            pstmt.setString(4, beacon);
             
-            
-            pstmt.setInt(4, id);
+            pstmt.setInt(5, id);
             // update 
             pstmt.executeUpdate();
         } catch (SQLException e) {

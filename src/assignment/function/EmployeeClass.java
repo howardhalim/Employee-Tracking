@@ -11,13 +11,23 @@ package assignment.function;
  */
 public class EmployeeClass {
     String name;
+    String beacon;
     String ic_passport;
     double hourly_rate;
 
-    public EmployeeClass(String name, String ic_passport, double hourly_rate) {
+    public EmployeeClass(String name, String ic_passport, double hourly_rate, String beacon) {
         this.name = name;
         this.ic_passport = ic_passport;
         this.hourly_rate = hourly_rate;
+        this.beacon = beacon;
+    }
+
+    public String getBeacon() {
+        return beacon;
+    }
+
+    public void setBeacon(String beacon) {
+        this.beacon = beacon;
     }
 
     public String getName() {

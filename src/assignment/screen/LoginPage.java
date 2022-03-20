@@ -136,7 +136,6 @@ public class LoginPage extends javax.swing.JFrame {
         String user = Username.getText();
         char[] pass = Password.getPassword();
         String verif = user+ new String(pass);
-        System.out.println(verif);
         
         Server x = new Server();
         try {
