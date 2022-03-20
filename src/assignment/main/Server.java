@@ -151,7 +151,8 @@ public class Server {
             while (rs.next()) {
                 String user = rs.getString("username");
                 String user_decrypt = crypto.decrypt(user, myKey);
-                if(user.equals(username)){
+                System.out.println(user_decrypt + " " + username);
+                if(user_decrypt.equals(username)){
                     return false;
                 }
             }
